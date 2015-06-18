@@ -3,35 +3,22 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.intellectualcrafters</groupId>
+    <groupId>PlotSquared-Chinese</groupId>
 	<properties>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
     <artifactId>PlotSquared-Chinese</artifactId>
     <version>2.11.21-SNAPSHOT</version>
     <name>PlotSquared-Chinese</name>
-    <packaging>jar</packaging>
     <build>
-        <finalName>PlotSquared-Chinese</finalName>
-        <sourceDirectory>src/main/java</sourceDirectory>
-        <resources>
-            <resource>
-               <filtering>true</filtering>
-               <excludes>
-		          <exclude>skyblock.template</exclude>
-		          <exclude>town.template</exclude>
-		      </excludes>
-               <directory>${basedir}/src/main/resources/</directory>
-            </resource>
-            <resource>
-               <filtering>false</filtering>
-               <includes>
-		          <include>skyblock.template</include>
-		          <include>town.template</include>
-		      </includes>
-               <directory>${basedir}/src/main/resources/</directory>
-            </resource>
-        </resources>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>**/*.java</exclude>
+        </excludes>
+      </resource>
+    </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
