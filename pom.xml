@@ -49,8 +49,8 @@
             <url>http://repo.bukkit.org/content/groups/public/</url>
         </repository>
         <repository>
-            <id>dead-repo</id>
-            <url>http://ci.dead-war.gq:8081/content/groups/public/</url>
+            <id>empcraft-repo</id>
+            <url>http://empcraft.com/maven2</url>
         </repository>
         <repository>
             <id>spigot-repo</id>
