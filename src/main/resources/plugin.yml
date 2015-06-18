@@ -1,0 +1,23 @@
+﻿name: PlotSquared
+main: com.intellectualcrafters.plot.BukkitMain
+version: 2.11.21
+load: STARTUP
+description: >
+             简单 ,功能强大的地皮世界管理插件.
+authors: [Citymonstret, Empire92, Mayomi]
+softdepend: [WorldEdit, BarAPI, CameraAPI, Vault]
+loadbefore: [MultiWorld, Multiverse-Core]
+database: false
+commands:
+  plots:
+    description: PlotSquared PlotSquared command.
+    aliases: [p,plot,ps,plotsquared,p2]
+    permission: plots.use
+    permission-message: "你需要拥有权限 plots.use"
+permissions:
+  plots.use:
+    default: op
+  plots.admin:
+    default: op
+  plots.worldedit.bypass:
+    default: false
