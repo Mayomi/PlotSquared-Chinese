@@ -58,7 +58,7 @@ public class FlagManager {
      * @return boolean success
      */
     public static boolean addFlag(final AbstractFlag af) {
-        PlotSquared.log(C.PREFIX.s() + "&8 - Adding flag: &7" + af);
+        PlotSquared.log(C.PREFIX.s() + "&8 - 添加了标识: &7" + af);
         for (PlotWorld plotworld : PlotSquared.getPlotWorldObjects()) {
             for (final Flag flag : plotworld.DEFAULT_FLAGS) {
                 if (flag.getAbstractFlag().getKey().equals(af.getKey())) {
