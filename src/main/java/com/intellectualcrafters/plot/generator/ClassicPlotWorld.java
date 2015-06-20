@@ -12,7 +12,7 @@ public abstract class ClassicPlotWorld extends SquarePlotWorld {
     public static int ROAD_HEIGHT_DEFAULT = 64;
     public static int PLOT_HEIGHT_DEFAULT = 64;
     public static int WALL_HEIGHT_DEFAULT = 64;
-    public static PlotBlock[] MAIN_BLOCK_DEFAULT = new PlotBlock[] { new PlotBlock((short) 1, (byte) 0) };
+    public static PlotBlock[] MAIN_BLOCK_DEFAULT = new PlotBlock[] { new PlotBlock((short) 3, (byte) 0) };
     public static PlotBlock[] TOP_BLOCK_DEFAULT = new PlotBlock[] { new PlotBlock((short) 2, (byte) 0) };
     public static PlotBlock WALL_BLOCK_DEFAULT = new PlotBlock((short) 44, (byte) 0);
     public final static PlotBlock CLAIMED_WALL_BLOCK_DEFAULT = new PlotBlock((short) 44, (byte) 1);
@@ -38,8 +38,8 @@ public abstract class ClassicPlotWorld extends SquarePlotWorld {
      */
     @Override
     public ConfigurationNode[] getSettingNodes() {
-        return new ConfigurationNode[] { new ConfigurationNode("plot.height", ClassicPlotWorld.PLOT_HEIGHT_DEFAULT, "Plot height", Configuration.INTEGER, true), new ConfigurationNode("plot.size", SquarePlotWorld.PLOT_WIDTH_DEFAULT, "Plot width", Configuration.INTEGER, true), new ConfigurationNode("plot.filling", ClassicPlotWorld.MAIN_BLOCK_DEFAULT, "Plot block", Configuration.BLOCKLIST, true), new ConfigurationNode("plot.floor", ClassicPlotWorld.TOP_BLOCK_DEFAULT, "Plot floor block", Configuration.BLOCKLIST, true), new ConfigurationNode("wall.block", ClassicPlotWorld.WALL_BLOCK_DEFAULT, "Top wall block", Configuration.BLOCK, true), new ConfigurationNode("wall.block_claimed", ClassicPlotWorld.CLAIMED_WALL_BLOCK_DEFAULT, "Wall block (claimed)", Configuration.BLOCK, true), new ConfigurationNode("road.width", SquarePlotWorld.ROAD_WIDTH_DEFAULT, "Road width", Configuration.INTEGER, true),
-                new ConfigurationNode("road.height", ClassicPlotWorld.ROAD_HEIGHT_DEFAULT, "Road height", Configuration.INTEGER, true), new ConfigurationNode("road.block", ClassicPlotWorld.ROAD_BLOCK_DEFAULT, "Road block", Configuration.BLOCK, true), new ConfigurationNode("wall.filling", ClassicPlotWorld.WALL_FILLING_DEFAULT, "Wall filling block", Configuration.BLOCK, true), new ConfigurationNode("wall.height", ClassicPlotWorld.WALL_HEIGHT_DEFAULT, "Wall height", Configuration.INTEGER, true), new ConfigurationNode("plot.bedrock", true, "Plot bedrock generation", Configuration.BOOLEAN, true) };
+        return new ConfigurationNode[] { new ConfigurationNode("plot.height", ClassicPlotWorld.PLOT_HEIGHT_DEFAULT, "地皮高度", Configuration.INTEGER, true), new ConfigurationNode("plot.size", SquarePlotWorld.PLOT_WIDTH_DEFAULT, "地皮宽度", Configuration.INTEGER, true), new ConfigurationNode("plot.filling", ClassicPlotWorld.MAIN_BLOCK_DEFAULT, "地皮内部方块", Configuration.BLOCKLIST, true), new ConfigurationNode("plot.floor", ClassicPlotWorld.TOP_BLOCK_DEFAULT, "地皮表面方块", Configuration.BLOCKLIST, true), new ConfigurationNode("wall.block", ClassicPlotWorld.WALL_BLOCK_DEFAULT, "顶部墙面方块", Configuration.BLOCK, true), new ConfigurationNode("wall.block_claimed", ClassicPlotWorld.CLAIMED_WALL_BLOCK_DEFAULT, "领取后顶部墙面方块", Configuration.BLOCK, true), new ConfigurationNode("road.width", SquarePlotWorld.ROAD_WIDTH_DEFAULT, "道路宽度", Configuration.INTEGER, true),
+                new ConfigurationNode("road.height", ClassicPlotWorld.ROAD_HEIGHT_DEFAULT, "道路高度", Configuration.INTEGER, true), new ConfigurationNode("road.block", ClassicPlotWorld.ROAD_BLOCK_DEFAULT, "Road block", Configuration.BLOCK, true), new ConfigurationNode("wall.filling", ClassicPlotWorld.WALL_FILLING_DEFAULT, "内部墙面方块", Configuration.BLOCK, true), new ConfigurationNode("wall.height", ClassicPlotWorld.WALL_HEIGHT_DEFAULT, "墙面高度", Configuration.INTEGER, true), new ConfigurationNode("plot.bedrock", true, "是否生成保护基岩", Configuration.BOOLEAN, true) };
     }
 
     /**

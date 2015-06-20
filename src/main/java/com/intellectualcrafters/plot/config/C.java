@@ -171,7 +171,7 @@ public enum C {
      * Setup Stuff
      */
     SETUP_INIT("$1用法: $2/plot setup <参数>", "Setup"),
-    SETUP_STEP("$3[$1步骤 - %s$3] $1%s $2- $1类型: $2%s $1默认值: $2%s", "Setup"),
+    SETUP_STEP("$3[$1步骤 - %s$3] $1%s $2- $1类型: $2%s $1建议值: $2%s", "Setup"),
     SETUP_INVALID_ARG("$2%s不是步骤 %s 的有效参数. 取消构建输入: $1/plot setup cancel", "Setup"),
     SETUP_VALID_ARG("$2参数 $1%s $2设置为 %s", "Setup"),
     SETUP_FINISHED("$3$3如果使用了 MULTIVERSE 或 MULTIWORLD 插件世界的配置会自动写入. 否则你需要手动写入文件 bukkit.yml", "Setup"),
