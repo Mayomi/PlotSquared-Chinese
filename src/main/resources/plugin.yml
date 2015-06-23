@@ -1,6 +1,6 @@
 ﻿name: PlotSquared
 main: com.intellectualcrafters.plot.BukkitMain
-version: 2.11.21
+version: ${project.version}
 load: STARTUP
 description: >
              简单 ,功能强大的地皮世界管理插件.

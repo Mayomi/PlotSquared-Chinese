@@ -88,7 +88,10 @@ public class BukkitPlayer implements PlotPlayer {
     @Override
     public boolean isOp() {
         if (this.op != 0) {
-            return this.op != 1;
+            if (this.op == 1) {
+                return false;
+            }
+            return true;
         }
         final boolean result = this.player.isOp();
         if (!result) {
@@ -173,5 +176,17 @@ public class BukkitPlayer implements PlotPlayer {
     public void removeAttribute(String key) {
         key = "plotsquared_user_attributes." + key;
         EconHandler.manager.setPermission(this, key, false);
+    }
+
+    @Override
+    public void loadData() {
+        if (!player.isOnline()) {
+            player.loadData();
+        }
+    }
+
+    @Override
+    public void saveData() {
+        player.saveData();
     }
 }
