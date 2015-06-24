@@ -279,7 +279,7 @@ public class SchematicCmd extends SubCommand {
                     return false;
                 }
                 else {
-                	MainUtil.sendMessage(plr, "&7进程以及开始.");
+                	MainUtil.sendMessage(plr, "&7正在开始输出文件...");
                 }
                 break;
             }
