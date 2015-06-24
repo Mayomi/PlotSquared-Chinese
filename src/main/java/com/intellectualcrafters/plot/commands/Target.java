@@ -29,7 +29,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class Target extends SubCommand {
     public Target() {
-        super(Command.TARGET, "Target a plot with your compass", "target <X;Z>", CommandCategory.ACTIONS, true);
+        super(Command.TARGET, "使用指南针来指定地皮", "target <X;Z>", CommandCategory.ACTIONS, true);
     }
 
     @Override

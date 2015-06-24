@@ -7,7 +7,7 @@ import com.intellectualcrafters.plot.object.PlotWorld;
 
 public class Chat extends SubCommand {
     public Chat() {
-        super(Command.CHAT, "Toggle plot chat on or off", "chat", CommandCategory.ACTIONS, true);
+        super(Command.CHAT, "切换地皮聊天开关", "chat", CommandCategory.ACTIONS, true);
     }
 
     @Override

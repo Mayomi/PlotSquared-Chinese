@@ -49,7 +49,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 @SuppressWarnings({ "javadoc" })
 public class Info extends SubCommand {
     public Info() {
-        super(Command.INFO, "Display plot info", "info", CommandCategory.INFO, false);
+        super(Command.INFO, "显示地皮信息", "info", CommandCategory.INFO, false);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Info extends SubCommand {
         if (args.length == 1) {
             info = getCaption(args[0].toLowerCase());
             if (info == null) {
-                MainUtil.sendMessage(player, "&6Categories&7: &amembers&7, &aalias&7, &abiome&7, &adenied&7, &aflags&7, &aid&7, &asize&7, &atrusted&7, &aowner&7, &arating");
+                MainUtil.sendMessage(player, "&6分类s&7: &amembers&7, &aalias&7, &abiome&7, &adenied&7, &aflags&7, &aid&7, &asize&7, &atrusted&7, &aowner&7, &arating");
                 return false;
             }
         }
@@ -202,7 +202,7 @@ public class Info extends SubCommand {
     public static String getPlayerList(final Collection<UUID> uuids) {
         ArrayList<UUID> l = new ArrayList<>(uuids);
         if ((l == null) || (l.size() < 1)) {
-            return C.NONE.s();
+        	return C.NONE.s();
         }
         final String c = C.PLOT_USER_LIST.s();
         final StringBuilder list = new StringBuilder();

@@ -33,7 +33,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
  */
 public class Home extends SubCommand {
     public Home() {
-        super(Command.HOME, "Go to your plot", "home {id|alias}", CommandCategory.TELEPORT, true);
+        super(Command.HOME, "回到你的地皮", "home {id|alias}", CommandCategory.TELEPORT, true);
     }
 
     private Plot isAlias(final String a) {
@@ -74,7 +74,7 @@ public class Home extends SubCommand {
                 return true;
             }
             if ((id > (plots.size())) || (id < 1)) {
-                MainUtil.sendMessage(plr, C.NOT_VALID_NUMBER, "(1, " + plots.size() + ")");
+            	MainUtil.sendMessage(plr, C.NOT_VALID_NUMBER, "(1, " + plots.size() + ")");
                 return false;
             }
             MainUtil.teleportPlayer(plr, plr.getLocation(), plots.get(id - 1));

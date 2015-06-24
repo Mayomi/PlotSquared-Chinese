@@ -21,12 +21,12 @@
 package com.intellectualcrafters.plot.commands;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 
@@ -50,7 +50,7 @@ import com.intellectualcrafters.plot.util.bukkit.chat.FancyMessage;
  */
 public class list extends SubCommand {
     public list() {
-        super(Command.LIST, "List all plots", "list {mine|shared|all|world|forsale}", CommandCategory.INFO, false);
+        super(Command.LIST, "列出全部地皮", "list {mine|shared|all|world|forsale}", CommandCategory.INFO, false);
     }
 
     private static String getName(final UUID id) {
@@ -69,13 +69,13 @@ public class list extends SubCommand {
         builder.append(C.SUBCOMMAND_SET_OPTIONS_HEADER.s());
         if (plr != null) {
             if (EconHandler.manager != null) {
-                builder.append(getArgumentList(new String[] { "mine", "shared", "world", "all", "unowned", "unknown", "forsale", "<player>", "<world>"}));
+                builder.append(getArgumentList(new String[] { "mine", "shared", "world", "all", "unowned", "unknown", "forsale", "<玩家名称>", "<世界名称>"}));
             }
             else {
-                builder.append(getArgumentList(new String[] { "mine", "shared", "world", "all", "unowned", "unknown", "<player>", "<world>"}));
+                builder.append(getArgumentList(new String[] { "mine", "shared", "world", "all", "unowned", "unknown", "<玩家名称>", "<世界名称>"}));
             }
         } else {
-            builder.append(getArgumentList(new String[] { "world", "all", "unowned", "unknown", "<player>", "<world>"}));
+            builder.append(getArgumentList(new String[] { "world", "all", "unowned", "unknown", "<玩家名称>", "<世界名称>"}));
         }
         MainUtil.sendMessage(plr, builder.toString());
     }
@@ -250,7 +250,7 @@ public class list extends SubCommand {
     }
     
     public void displayPlots(PlotPlayer player, Collection<Plot> oldPlots, int pageSize, int page, String world, String[] args) {
-        List<Plot> plots;
+    	List<Plot> plots;
         if (world != null) {
             plots = PlotSquared.sortPlots(oldPlots, world);
         }
@@ -442,6 +442,7 @@ public class list extends SubCommand {
         else {
             String footer = C.PLOT_LIST_FOOTER.s().replaceAll("%word%", "There is").replaceAll("%num%", plots.size() + "").replaceAll("%plot%", plots.size() == 1 ? "plot" : "plots"); 
             MainUtil.sendMessage(player, footer);
+
         }
     }
     

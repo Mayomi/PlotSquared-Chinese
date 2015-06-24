@@ -37,7 +37,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class Delete extends SubCommand {
     public Delete() {
-        super(Command.DELETE, "Delete a plot", "delete", CommandCategory.ACTIONS, true);
+        super(Command.DELETE, "删除一个地皮", "delete", CommandCategory.ACTIONS, true);
     }
 
     @Override

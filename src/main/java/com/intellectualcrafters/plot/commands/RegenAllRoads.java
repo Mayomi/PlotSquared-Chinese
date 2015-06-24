@@ -33,7 +33,7 @@ import com.intellectualcrafters.plot.util.ChunkManager;
 
 public class RegenAllRoads extends SubCommand {
     public RegenAllRoads() {
-        super(Command.REGENALLROADS, "Regenerate all roads in the map using the set road schematic", "rgar", CommandCategory.DEBUG, false);
+        super(Command.REGENALLROADS, "在当前地图重建全部的道路", "rgar", CommandCategory.DEBUG, false);
     }
 
     @Override
@@ -52,8 +52,8 @@ public class RegenAllRoads extends SubCommand {
                 height = Integer.parseInt(args[1]);
             }
             catch (NumberFormatException e) {
-                sendMessage(player, C.NOT_VALID_NUMBER, "(0, 256)");
-                sendMessage(player, C.COMMAND_SYNTAX, "/plot regenallroads <world> [height]");
+            	sendMessage(player, C.NOT_VALID_NUMBER, "(0, 256)");
+                sendMessage(player, C.COMMAND_SYNTAX, "/plot regenallroads <世界名称> [高度]");
                 return false;
             }
         }
@@ -64,13 +64,13 @@ public class RegenAllRoads extends SubCommand {
             return false;
         }
         final List<ChunkLoc> chunks = ChunkManager.manager.getChunkChunks(name);
-        PlotSquared.log("&cIf no schematic is set, the following will not do anything");
-        PlotSquared.log("&7 - To set a schematic, stand in a plot and use &c/plot createroadschematic");
-        PlotSquared.log("&6Potential chunks to update: &7" + (chunks.size() * 1024));
-        PlotSquared.log("&6Estimated time: &7" + (chunks.size()) + " seconds");
+        PlotSquared.log("&c如果没有设置建筑文件, 将不会有任何事情发生");
+        PlotSquared.log("&7 - 设置一个建筑文件, 站在地皮上输入 &c/plot createroadschematic");
+        PlotSquared.log("&6所有区块更新: &7" + (chunks.size() * 1024));
+        PlotSquared.log("&6预估时间: &7" + (chunks.size()) + " 秒");
         final boolean result = HybridUtils.manager.scheduleRoadUpdate(name, height);
         if (!result) {
-            PlotSquared.log("&cCannot schedule mass schematic update! (Is one already in progress?)");
+            PlotSquared.log("&c无法计划地图文件更新! (是否有进程未完成?)");
             return false;
         }
         return true;

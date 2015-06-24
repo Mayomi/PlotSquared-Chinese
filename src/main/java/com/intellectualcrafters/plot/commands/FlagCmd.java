@@ -41,7 +41,7 @@ import com.intellectualcrafters.plot.util.Permissions;
 
 public class FlagCmd extends SubCommand {
     public FlagCmd() {
-        super(Command.FLAG, "Manage plot flags", "f", CommandCategory.ACTIONS, true);
+        super(Command.FLAG, "管理地皮标识", "f", CommandCategory.ACTIONS, true);
     }
 
     @Override
@@ -78,13 +78,13 @@ public class FlagCmd extends SubCommand {
                     return false;
                 }
                 if (args.length != 2) {
-                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag info <flag>");
+                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag info <标识>");
                     return false;
                 }
                 final AbstractFlag af = FlagManager.getFlag(args[1]);
                 if (af == null) {
                     MainUtil.sendMessage(player, C.NOT_VALID_FLAG);
-                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag info <flag>");
+                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag info <标识>");
                     return false;
                 }
                 // flag key
@@ -100,7 +100,7 @@ public class FlagCmd extends SubCommand {
                     return false;
                 }
                 if (args.length < 3) {
-                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag set <flag> <value>");
+                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag set <标识> <参数>");
                     return false;
                 }
                 final AbstractFlag af = FlagManager.getFlag(args[1].toLowerCase());
@@ -134,7 +134,7 @@ public class FlagCmd extends SubCommand {
                     return false;
                 }
                 if ((args.length != 2) && (args.length != 3)) {
-                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag remove <flag> [values]");
+                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag remove <标识> [参数]");
                     return false;
                 }
                 final AbstractFlag af = FlagManager.getFlag(args[1].toLowerCase());
@@ -172,7 +172,7 @@ public class FlagCmd extends SubCommand {
                     return false;
                 }
                 if (args.length < 3) {
-                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag add <flag> <values>");
+                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot flag add <标识> <参数>");
                     return false;
                 }
                 final AbstractFlag af = FlagManager.getFlag(args[1].toLowerCase());

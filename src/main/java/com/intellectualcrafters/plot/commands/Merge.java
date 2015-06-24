@@ -45,10 +45,10 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
  */
 public class Merge extends SubCommand {
     public final static String[] values = new String[] { "north", "east", "south", "west" };
-    public final static String[] aliases = new String[] { "n", "e", "s", "w" };
+    public final static String[] aliases = new String[] { "bei", "dong", "nan", "xi" };
 
     public Merge() {
-        super(Command.MERGE, "Merge the plot you are standing on with another plot.", "merge", CommandCategory.ACTIONS, true);
+        super(Command.MERGE, "合并你地皮附近的地皮.", "merge", CommandCategory.ACTIONS, true);
     }
 
     public static String direction(float yaw) {
@@ -187,7 +187,7 @@ public class Merge extends SubCommand {
                             }
                             final boolean result = EventUtil.manager.callMerge(world, plot, plots);
                             if (!result) {
-                                MainUtil.sendMessage(plr, "&cMerge has been cancelled");
+                                MainUtil.sendMessage(plr, "&c地皮合并被取消");
                                 return;
                             }
                             MainUtil.sendMessage(plr, C.SUCCESS_MERGE);
@@ -216,7 +216,7 @@ public class Merge extends SubCommand {
         }
         final boolean result = EventUtil.manager.callMerge(world, plot, plots);
         if (!result) {
-            MainUtil.sendMessage(plr, "&cMerge has been cancelled");
+            MainUtil.sendMessage(plr, "&c地皮合并被取消");
             return false;
         }
         MainUtil.sendMessage(plr, C.SUCCESS_MERGE);

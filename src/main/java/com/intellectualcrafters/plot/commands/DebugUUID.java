@@ -50,7 +50,7 @@ import com.intellectualcrafters.plot.uuid.UUIDWrapper;
 
 public class DebugUUID extends SubCommand {
     public DebugUUID() {
-        super("uuidconvert", "plots.admin", "Debug uuid conversion", "debuguuid", "debuguuid", CommandCategory.DEBUG, false);
+        super("uuidconvert", "plots.admin", "UUID转换调试", "debuguuid", "debuguuid", CommandCategory.DEBUG, false);
     }
 
     @Override
@@ -94,31 +94,31 @@ public class DebugUUID extends SubCommand {
         
         if (args.length != 2 || !args[1].equals("-o")) {
             MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot uuidconvert " + args[0] + " - o");
-            MainUtil.sendMessage(player, "&cBe aware of the following!");
-            MainUtil.sendMessage(player, "&8 - &cIf the process is interrupted, all plots could be deleted");
-            MainUtil.sendMessage(player, "&8 - &cIf an error occurs, all plots could be deleted");
-            MainUtil.sendMessage(player, "&8 - &cPlot settings WILL be lost upon conversion");
-            MainUtil.sendMessage(player, "&cBACK UP YOUR DATABASE BEFORE USING THIS!!!");
-            MainUtil.sendMessage(player, "&7Retype the command with the override parameter when ready");
+            MainUtil.sendMessage(player, "&c请注意以下问题!");
+            MainUtil.sendMessage(player, "&8 - &c如果中断进程, 所有的地皮将会被删除");
+            MainUtil.sendMessage(player, "&8 - &c如果发生错误, 所有的地皮将会被删除");
+            MainUtil.sendMessage(player, "&8 - &转换的时候地皮设置将会被删除");
+            MainUtil.sendMessage(player, "&c在使用之前请务必备份数据!!!");
+            MainUtil.sendMessage(player, "&7准备就绪后重新输入指令和参数");
             return false;
         }
         
         if (currentUUIDWrapper.getClass().getCanonicalName().equals(newWrapper.getClass().getCanonicalName())) {
-            MainUtil.sendMessage(player, "&cUUID mode already in use!");
+            MainUtil.sendMessage(player, "&c正在使用 UUID 模式!");
             return false;
         }
-        MainUtil.sendConsoleMessage("&6Beginning UUID mode conversion");
-        MainUtil.sendConsoleMessage("&7 - Disconnecting players");
+        MainUtil.sendConsoleMessage("&6正在开始 UUID 模式转换");
+        MainUtil.sendConsoleMessage("&7 - 正在断开玩家的服务器连接");
         for (PlotPlayer user : UUIDHandler.players.values()) {
-            PlayerManager.manager.kickPlayer(user, "PlotSquared UUID conversion has been initiated. You may reconnect when finished.");
+            PlayerManager.manager.kickPlayer(user, "PlotSquared UUID 转换已经开始. 当转换完成后你可以重新连入服务器.");
         }
         
-        MainUtil.sendConsoleMessage("&7 - Initializing map");
+        MainUtil.sendConsoleMessage("&7 - 正在初始化地图");
         
         HashMap<UUID, UUID> uCMap = new HashMap<UUID, UUID>();
         HashMap<UUID, UUID> uCReverse = new HashMap<UUID, UUID>();
         
-        MainUtil.sendConsoleMessage("&7 - Collecting playerdata");
+        MainUtil.sendConsoleMessage("&7 - 正在获取玩家数据");
 
         final HashSet<String> worlds = new HashSet<>();
         worlds.add(Bukkit.getWorlds().get(0).getName());
@@ -140,7 +140,7 @@ public class DebugUUID extends SubCommand {
                         final UUID uuid = UUID.fromString(s);
                         uuids.add(uuid);
                     } catch (final Exception e) {
-                        PlotSquared.log(C.PREFIX.s() + "Invalid playerdata: " + current);
+                        PlotSquared.log(C.PREFIX.s() + "无效的玩家数据: " + current);
                     }
                 }
             }
@@ -158,7 +158,7 @@ public class DebugUUID extends SubCommand {
             }
         }
         
-        MainUtil.sendConsoleMessage("&7 - Populating map");
+        MainUtil.sendConsoleMessage("&7 - 正在构建地图");
         UUID uuid2;
         final UUIDWrapper wrapper = new DefaultUUIDWrapper();
         for (UUID uuid : uuids) {
@@ -171,7 +171,7 @@ public class DebugUUID extends SubCommand {
                     uCReverse.put(uuid2, uuid);
                 }
             } catch (final Throwable e) {
-                PlotSquared.log(C.PREFIX.s() + "&6Invalid playerdata: " + uuid.toString() + ".dat");
+                PlotSquared.log(C.PREFIX.s() + "&6无效的玩家数据: " + uuid.toString() + ".dat");
             }
         }
         for (final String name : names) {
@@ -183,7 +183,7 @@ public class DebugUUID extends SubCommand {
             }
         }
         if (uCMap.size() == 0) {
-            MainUtil.sendConsoleMessage("&c - Error! Attempting to repopulate");
+            MainUtil.sendConsoleMessage("&c - 错误! 尝试重新构建");
             for (OfflinePlotPlayer op : currentUUIDWrapper.getOfflinePlayers()) {
                 if (op.getLastPlayed() != 0) {
                     String name = op.getName();
@@ -197,24 +197,24 @@ public class DebugUUID extends SubCommand {
                 }
             }
             if (uCMap.size() == 0) {
-                MainUtil.sendConsoleMessage("&cError. Failed to collect UUIDs!");
+                MainUtil.sendConsoleMessage("&c错误. 无法获取 UUID!");
                 return false;
             }
             else {
-                MainUtil.sendConsoleMessage("&a - Successfully repopulated");
+                MainUtil.sendConsoleMessage("&a - 重新构建成功");
             }
         }
         
-        MainUtil.sendConsoleMessage("&7 - Replacing cache");
+        MainUtil.sendConsoleMessage("&7 - 正在更换 Cache");
         for (Entry<UUID, UUID> entry : uCMap.entrySet()) {
             String name = UUIDHandler.getName(entry.getKey());
             UUIDHandler.add(new StringWrapper(name), entry.getValue());
         }
         
-        MainUtil.sendConsoleMessage("&7 - Replacing wrapper");
+        MainUtil.sendConsoleMessage("&7 - 正在更换 Wrapper");
         UUIDHandler.uuidWrapper = newWrapper;
         
-        MainUtil.sendConsoleMessage("&7 - Updating plot objects");
+        MainUtil.sendConsoleMessage("&7 - 正在更新地皮");
         
         for (Plot plot : PlotSquared.getPlotsRaw()) {
             UUID value = uCMap.get(plot.owner);
@@ -226,16 +226,16 @@ public class DebugUUID extends SubCommand {
             plot.denied = new ArrayList<>();
         }
         
-        MainUtil.sendConsoleMessage("&7 - Deleting database");
+        MainUtil.sendConsoleMessage("&7 - 正在删除数据库");
         final AbstractDB database = DBFunc.dbManager;
         boolean result = database.deleteTables();
 
-        MainUtil.sendConsoleMessage("&7 - Creating tables");
+        MainUtil.sendConsoleMessage("&7 - 正在创建表单");
         
         try {
             database.createTables(Settings.DB.USE_MYSQL ? "mysql" : "sqlite");
             if (!result) {
-                MainUtil.sendConsoleMessage("&cConversion failed! Attempting recovery");
+                MainUtil.sendConsoleMessage("&c转换失败! 正在尝试恢复");
                 for (Plot plot : PlotSquared.getPlots()) {
                     UUID value = uCReverse.get(plot.owner);
                     if (value != null) {
@@ -245,7 +245,7 @@ public class DebugUUID extends SubCommand {
                 database.createPlotsAndData(new ArrayList<>(PlotSquared.getPlots()), new Runnable() {
                     @Override
                     public void run() {
-                        MainUtil.sendMessage(null, "&6Recovery was successful!");
+                        MainUtil.sendMessage(null, "&6恢复成功!");
                     }
                 });
                 return false;
@@ -272,10 +272,10 @@ public class DebugUUID extends SubCommand {
             PlotSquared.config.save(PlotSquared.configFile);
         }
         catch (Exception e) {
-            MainUtil.sendConsoleMessage("Could not save configuration. It will need to be manuall set!");
+            MainUtil.sendConsoleMessage("C无法保存配置文件. 这将需要手动设置!");
         }
         
-        MainUtil.sendConsoleMessage("&7 - Populating tables");
+        MainUtil.sendConsoleMessage("&7 - 正在填充表格");
         
         TaskManager.runTaskAsync(new Runnable() {
             @Override
@@ -284,14 +284,14 @@ public class DebugUUID extends SubCommand {
                 database.createPlotsAndData(plots, new Runnable() {
                     @Override
                     public void run() {
-                        MainUtil.sendConsoleMessage("&aConversion complete!");
+                        MainUtil.sendConsoleMessage("&a转换完成!");
                     }
                 });
             }
         });
         
-        MainUtil.sendConsoleMessage("&aIt is now safe for players to join");
-        MainUtil.sendConsoleMessage("&cConversion is still in progress, you will be notified when it is complete");
+        MainUtil.sendConsoleMessage("&a现在玩家将可以进入服务器了");
+        MainUtil.sendConsoleMessage("&c但是转换仍在进行, 转换就绪后将会收到通知");
         return true;
     }
 }

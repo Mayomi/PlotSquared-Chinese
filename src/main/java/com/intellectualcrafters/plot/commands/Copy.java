@@ -35,7 +35,7 @@ import com.intellectualcrafters.plot.util.Permissions;
  */
 public class Copy extends SubCommand {
     public Copy() {
-        super("copy", "plots.copy", "Copy a plot", "copypaste", "", CommandCategory.ACTIONS, true);
+        super("copy", "plots.copy", "复制一块地皮", "copypaste", "", CommandCategory.ACTIONS, true);
     }
 
     @Override

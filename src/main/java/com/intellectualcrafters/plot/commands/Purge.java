@@ -37,7 +37,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 @SuppressWarnings({ "javadoc" })
 public class Purge extends SubCommand {
     public Purge() {
-        super("purge", "plots.admin", "Purge all plots for a world", "purge", "", CommandCategory.DEBUG, false);
+        super("purge", "plots.admin", "清理一个世界的全部地皮", "purge", "", CommandCategory.DEBUG, false);
     }
 
     public PlotId getId(final String id) {
@@ -59,28 +59,28 @@ public class Purge extends SubCommand {
             final String arg = args[0].toLowerCase();
             final PlotId id = getId(arg);
             if (id != null) {
-                MainUtil.sendMessage(plr, "/plot purge x;z &l<world>");
+                MainUtil.sendMessage(plr, "/plot purge x;z &l<世界名称>");
                 return false;
             }
             final UUID uuid = UUIDHandler.getUUID(args[0]);
             if (uuid != null) {
-                MainUtil.sendMessage(plr, "/plot purge " + args[0] + " &l<world>");
+                MainUtil.sendMessage(plr, "/plot purge " + args[0] + " &l<世界名称>");
                 return false;
             }
             if (arg.equals("player")) {
-                MainUtil.sendMessage(plr, "/plot purge &l<player> <world>");
+                MainUtil.sendMessage(plr, "/plot purge &l<玩家名称> <世界名称>");
                 return false;
             }
             if (arg.equals("unowned")) {
-                MainUtil.sendMessage(plr, "/plot purge unowned &l<world>");
+                MainUtil.sendMessage(plr, "/plot purge unowned &l<世界名称>");
                 return false;
             }
             if (arg.equals("unknown")) {
-                MainUtil.sendMessage(plr, "/plot purge unknown &l<world>");
+                MainUtil.sendMessage(plr, "/plot purge unknown &l<世界名称>");
                 return false;
             }
             if (arg.equals("all")) {
-                MainUtil.sendMessage(plr, "/plot purge all &l<world>");
+                MainUtil.sendMessage(plr, "/plot purge all &l<世界名称>");
                 return false;
             }
             MainUtil.sendMessage(plr, C.PURGE_SYNTAX);
@@ -92,7 +92,7 @@ public class Purge extends SubCommand {
         }
         final String worldname = args[1];
         if (!PlotSquared.getAllPlotsRaw().containsKey(worldname)) {
-            MainUtil.sendMessage(plr, "INVALID WORLD");
+            MainUtil.sendMessage(plr, "无效的世界");
             return false;
         }
         final String arg = args[0].toLowerCase();
@@ -110,7 +110,7 @@ public class Purge extends SubCommand {
             final Set<PlotId> ids = PlotSquared.getPlots(worldname).keySet();
             int length = ids.size();
             if (length == 0) {
-                return MainUtil.sendMessage(null, "&cNo plots found");
+                return MainUtil.sendMessage(null, "&c没有发现地皮");
             }
             DBFunc.purge(worldname, ids);
             return finishPurge(length);
@@ -128,7 +128,7 @@ public class Purge extends SubCommand {
             }
             int length = ids.size();
             if (length == 0) {
-                return MainUtil.sendMessage(null, "&cNo plots found");
+                return MainUtil.sendMessage(null, "&c没有发现地皮");
             }
             DBFunc.purge(worldname, ids);
             return finishPurge(length);
@@ -143,7 +143,7 @@ public class Purge extends SubCommand {
             }
             int length = ids.size();
             if (length == 0) {
-                return MainUtil.sendMessage(null, "&cNo plots found");
+                return MainUtil.sendMessage(null, "&c没有发现地皮");
             }
             DBFunc.purge(worldname, ids);
             return finishPurge(length);

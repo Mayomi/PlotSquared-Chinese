@@ -324,10 +324,10 @@ public class PlotSquared {
             plotWorld = plotGenerator.getNewPlotWorld(world);
             plotManager = plotGenerator.getPlotManager();
             if (!world.equals("CheckingPlotSquaredGenerator")) {
-                log(C.PREFIX.s() + "&aDetected world load for '" + world + "'");
-                log(C.PREFIX.s() + "&3 - generator: &7" + plotGenerator.getClass().getName());
-                log(C.PREFIX.s() + "&3 - plotworld: &7" + plotWorld.getClass().getName());
-                log(C.PREFIX.s() + "&3 - manager: &7" + plotManager.getClass().getName());
+                log(C.PREFIX.s() + "&a读取已检测到的地皮世界 '" + world + "'");
+                log(C.PREFIX.s() + "&3 - 生成参数: &7" + plotGenerator.getClass().getName());
+                log(C.PREFIX.s() + "&3 - 地皮世界: &7" + plotWorld.getClass().getName());
+                log(C.PREFIX.s() + "&3 - 管理方式: &7" + plotManager.getClass().getName());
             }
             if (!config.contains(path)) {
                 config.createSection(path);
@@ -358,7 +358,7 @@ public class PlotSquared {
                     }
                     loadWorld(world, generator);
                 } catch (final Exception e) {
-                    log("&d=== Oh no! Please set the generator for the " + world + " ===");
+                    log("&d=== 请设置 " + world + " 的生成参数===");
                     e.printStackTrace();
                     LOADING_WORLD = false;
                     removePlotWorld(world);
@@ -385,7 +385,7 @@ public class PlotSquared {
                 }
                 
                 if (((plotWorld.TYPE == 2) && !Settings.ENABLE_CLUSTERS) || !(plotManager instanceof SquarePlotManager)) {
-                    log("&c[ERROR] World '" + world + "' in settings.yml is not using PlotSquared generator! Please set the generator correctly or delete the world from the 'settings.yml'!");
+                    log("&c[错误] 世界 '" + world + "' 没有使用在 setting.yml 中的 PlotSquared 生成参数! 请输入正确的生成参数或者在 setting.yml 删除该世界!");
                     return;
                 }
                 addPlotWorld(world, plotWorld, plotManager);
@@ -418,7 +418,7 @@ public class PlotSquared {
             for (final String element : split) {
                 final String[] pair = element.split("=");
                 if (pair.length != 2) {
-                    log("&cNo value provided for: &7" + element);
+                    log("&c没有提供参数: &7" + element);
                     return false;
                 }
                 final String key = pair[0].toLowerCase();
@@ -514,14 +514,14 @@ public class PlotSquared {
         C.setupTranslations();
         C.saveTranslations();
         if (getJavaVersion() < 1.7) {
-            log(C.PREFIX.s() + "&cYour java version is outdated. Please update to at least 1.7.");
+            log(C.PREFIX.s() + "&c你的JAVA版本过低. 请使用 1.7 及 1.7 以上的 JAVA .");
             // Didn't know of any other link :D
-            log(C.PREFIX.s() + "&cURL: &6https://java.com/en/download/index.jsp");
+            log(C.PREFIX.s() + "&c下载链接: &6https://java.com/en/download/index.jsp");
             IMP.disable();
             return;
         }
         if (getJavaVersion() < 1.8) {
-            log(C.PREFIX.s() + "&cIt's really recommended to run Java 1.8, as it increases performance");
+            log(C.PREFIX.s() + "&c推荐使用 1.8 版本的 JAVA .");
         }
         TASK = IMP.getTaskManager();
         if (C.ENABLED.s().length() > 0) {
@@ -572,11 +572,11 @@ public class PlotSquared {
                 @Override
                 public void run() {
                     if (IMP.initPlotMeConverter()) {
-                        log("&c=== IMPORTANT ===");
-                        log("&cTHIS MESSAGE MAY BE EXTREMELY HELPFUL IF YOU HAVE TROUBLE CONVERTING PLOTME!");
-                        log("&c - Make sure 'UUID.read-from-disk' is disabled (false)!");
-                        log("&c - Sometimes the database can be locked, deleting PlotMe.jar beforehand will fix the issue!");
-                        log("&c - After the conversion is finished, please set 'plotme-convert.enabled' to false in the 'settings.yml'");
+                        log("&c=== 重要信息 ===");
+                        log("&c如果从 PlotMe 转换到 PlotSquared 出现问题, 请详细阅读以下内容!");
+                        log("&c - 请务必确认 'UUID 下 read-from-disk' 是关闭的 (参数为 false)!");
+                        log("&c - 数据库可能被占用, 请在开服之前删除 PlotMe.jar 来解决该问题!");
+                        log("&c - 当转换完成后, 请务必在 setting.yml 中设置 'plotme-convert 下 enabled' 的参数为false");
                     }
                 }
             }, 200);
@@ -588,9 +588,6 @@ public class PlotSquared {
         // Copy files
         copyFile("town.template", "templates");
         copyFile("skyblock.template", "templates");
-        copyFile("german.yml", "translations");
-        copyFile("s_chinese_unescaped.yml", "translations");
-        copyFile("s_chinese.yml", "translations");
         showDebug();
     }
     
@@ -628,7 +625,7 @@ public class PlotSquared {
         }
         catch (Exception e) {
             e.printStackTrace();
-            log("&cCould not save " + file);
+            log("&c无法保存 " + file);
         }
     }
 
@@ -636,7 +633,7 @@ public class PlotSquared {
         try {
             database.closeConnection();
         } catch (NullPointerException | SQLException e) {
-            log("&cCould not close database connection!");
+            log("&c无法关闭数据库连接!");
         }
     }
 
@@ -656,12 +653,12 @@ public class PlotSquared {
                     DBFunc.createTables("mysql");
                 }
             } catch (final Exception e) {
-                log("&c[Plots] MySQL is not setup correctly. The plugin will disable itself.");
+                log("&c[地皮] Mysql数据库没有设置正确. 插件将会被禁用.");
                 if ((config == null) || config.getBoolean("debug")) {
-                    log("&d==== Here is an ugly stacktrace if you are interested in those things ====");
+                    log("&d==== 请无视下方报错代码 ====");
                     e.printStackTrace();
-                    log("&d==== End of stacktrace ====");
-                    log("&6Please go to the PlotSquared 'storage.yml' and configure MySQL correctly.");
+                    log("&d==== 请无视上方报错代码 ====");
+                    log("&6请在 storage.yml 中配置正确的 Mysql 数据库连接.");
                 }
                 IMP.disable();
                 return;
@@ -672,11 +669,11 @@ public class PlotSquared {
             }
         } else if (Settings.DB.USE_MONGO) {
             // DBFunc.dbManager = new MongoManager();
-            log(C.PREFIX.s() + "MongoDB is not yet implemented");
+            log(C.PREFIX.s() + "MongoDB 数据库还不可使用");
         } else if (Settings.DB.USE_SQLITE) {
             try {
-                this.database = new SQLite(THIS, IMP.getDirectory() + File.separator + Settings.DB.SQLITE_DB + ".db"); 
-                connection = this.database.openConnection();
+                database = new SQLite(THIS, IMP.getDirectory() + File.separator + Settings.DB.SQLITE_DB + ".db");
+                connection = database.openConnection();
                 {
                     DBFunc.dbManager = new SQLManager(connection, Settings.DB.PREFIX);
                     final DatabaseMetaData meta = connection.getMetaData();
@@ -684,9 +681,10 @@ public class PlotSquared {
                     DBFunc.createTables("sqlite");
                 }
             } catch (final Exception e) {
-                log(C.PREFIX.s() + "&cFailed to open SQLite connection. The plugin will disable itself.");
-                log("&9==== Here is an ugly stacktrace, if you are interested in those things ===");
+                log(C.PREFIX.s() + "&c无法打开 SQLite 数据库连接. 插件将会被禁用.");
+                log("&9==== 请无视下方报错代码 ====");
                 e.printStackTrace();
+                log("&9==== 请无视上方报错代码 ====");
                 IMP.disable();
                 return;
             }
@@ -695,7 +693,7 @@ public class PlotSquared {
                 ClusterManager.clusters = DBFunc.getClusters();
             }
         } else {
-            log(C.PREFIX + "&cNo storage type is set!");
+            log(C.PREFIX + "&c没有设置数据库类型!");
             IMP.disable();
             return;
         }
@@ -745,14 +743,17 @@ public class PlotSquared {
                     case "creative":
                     case "c":
                     case "1":
+                    case "cz":
                         return "creative";
                     case "survival":
                     case "s":
                     case "0":
+                    case "sc":
                         return "survival";
                     case "adventure":
                     case "a":
                     case "2":
+                    case "mx":
                         return "adventure";
                     default:
                         return null;
@@ -761,7 +762,7 @@ public class PlotSquared {
 
             @Override
             public String getValueDesc() {
-                return "Flag value must be a gamemode: 'creative' , 'survival' or 'adventure'";
+                return "有效的模式参数为: 'creative'或'cz' , 'survival'或'sc' , 'adventure'或'mx'";
             }
         });
         FlagManager.addFlag(new AbstractFlag("price", new FlagValue.UnsignedDoubleValue()));
@@ -788,7 +789,7 @@ public class PlotSquared {
 
             @Override
             public String getValueDesc() {
-                return "Flag value must be weather type: 'clear' or 'rain'";
+                return "有效的天气参数为: 'clear' or 'rain'";
             }
         });
     }
@@ -869,8 +870,8 @@ public class PlotSquared {
         options.put("claim.max-auto-area", Settings.MAX_AUTO_SIZE);
 
         // Misc
-        options.put("console.color", Settings.CONSOLE_COLOR);
         options.put("chat.fancy", Settings.FANCY_CHAT);
+        options.put("console.color", Settings.CONSOLE_COLOR);
         options.put("metrics", true);
         options.put("debug", true);
         options.put("auto_update", false);
@@ -951,7 +952,7 @@ public class PlotSquared {
         Settings.MAX_AUTO_SIZE = config.getInt("claim.max-auto-area");
         Settings.MAX_PLOTS = config.getInt("max_plots");
         if (Settings.MAX_PLOTS > 32767) {
-            log("&c`max_plots` Is set too high! This is a per player setting and does not need to be very large.");
+            log("&c`max_plots` 最大地皮值设置过高! 请不要设置这么多地皮数目.");
             Settings.MAX_PLOTS = 32767;
         }
         Settings.GLOBAL_LIMIT = config.getBoolean("global_limit");
@@ -959,16 +960,16 @@ public class PlotSquared {
         // Misc
         Settings.DEBUG = config.getBoolean("debug");
         if (Settings.DEBUG) {
-            log(C.PREFIX.s() + "&6Debug Mode Enabled (Default). Edit the config to turn this off.");
+            log(C.PREFIX.s() + "&6调试模式启用 (默认). 你可以在配置文件中关闭它.");
         }
         Settings.CONSOLE_COLOR = config.getBoolean("console.color");
         if (!config.getBoolean("chat.fancy") || !IMP.checkVersion(1, 7, 0)) {
-            System.out.print("FANCY CHAT =======================================");
-            System.out.print("FANCY CHAT =======================================");
-            System.out.print("FANCY CHAT =======================================");
-            System.out.print(!config.getBoolean("chat.fancy"));
-            System.out.print(!IMP.checkVersion(1, 7, 0));
-            Settings.FANCY_CHAT = false;
+        	System.out.print("FANCY CHAT =======================================");
+        	System.out.print("FANCY CHAT =======================================");
+        	System.out.print("FANCY CHAT =======================================");
+        	System.out.print(!config.getBoolean("chat.fancy"));
+        	System.out.print(!IMP.checkVersion(1, 7, 0));
+        	Settings.FANCY_CHAT = false;
         }
         Settings.METRICS = config.getBoolean("metrics");
     }
@@ -976,53 +977,53 @@ public class PlotSquared {
     public static void setupConfigs() {
         final File folder = new File(IMP.getDirectory() + File.separator + "config");
         if (!folder.exists() && !folder.mkdirs()) {
-            log(C.PREFIX.s() + "&cFailed to create the /plugins/config folder. Please create it manually.");
+            log(C.PREFIX.s() + "&c无法创建 /plugins/config 文件夹. 请自行创建一个.");
         }
         try {
             styleFile = new File(IMP.getDirectory() + File.separator + "translations" + File.separator + "style.yml");
             if (!styleFile.exists()) {
                 if (!styleFile.createNewFile()) {
-                    log("Could not create the style file, please create \"translations/style.yml\" manually");
+                    log("无法创建 style.yml 文件, 请自行创建一个 \"translations/style.yml\" 文件");
                 }
             }
             style = YamlConfiguration.loadConfiguration(styleFile);
             setupStyle();
         } catch (final Exception err) {
-            Logger.add(LogLevel.DANGER, "Failed to save style.yml");
-            log("failed to save style.yml");
+            Logger.add(LogLevel.DANGER, "无法保存 style.yml");
+            log("无法保存 style.yml");
         }
         try {
             configFile = new File(IMP.getDirectory() + File.separator + "config" + File.separator + "settings.yml");
             if (!configFile.exists()) {
                 if (!configFile.createNewFile()) {
-                    log("Could not create the settings file, please create \"settings.yml\" manually.");
+                    log("无法创建 setting.yml 文件,  请自行创建一个 \"settings.yml\" 文件.");
                 }
             }
             config = YamlConfiguration.loadConfiguration(configFile);
             setupConfig();
         } catch (final Exception err_trans) {
-            Logger.add(LogLevel.DANGER, "Failed to save settings.yml");
-            log("Failed to save settings.yml");
+            Logger.add(LogLevel.DANGER, "无法保存 settings.yml");
+            log("无法保存 settings.yml");
         }
         try {
             storageFile = new File(IMP.getDirectory() + File.separator + "config" + File.separator + "storage.yml");
             if (!storageFile.exists()) {
                 if (!storageFile.createNewFile()) {
-                    log("Could not the storage settings file, please create \"storage.yml\" manually.");
+                    log("无法创建 storage.yml 文件, 请自行创建一个 \"storage.yml\" 文件.");
                 }
             }
             storage = YamlConfiguration.loadConfiguration(storageFile);
             setupStorage();
         } catch (final Exception err_trans) {
-            Logger.add(LogLevel.DANGER, "Failed to save storage.yml");
-            log("Failed to save storage.yml");
+            Logger.add(LogLevel.DANGER, "无法保存 storage.yml");
+            log("无法保存 storage.yml");
         }
         try {
             style.save(styleFile);
             config.save(configFile);
             storage.save(storageFile);
         } catch (final IOException e) {
-            Logger.add(LogLevel.DANGER, "Configuration file saving failed");
+            Logger.add(LogLevel.DANGER, "配置文件保存失败");
             e.printStackTrace();
         }
     }
@@ -1066,18 +1067,18 @@ public class PlotSquared {
         C.COLOR_4 = "&" + (style.getString("color.4"));
         if (Settings.DEBUG) {
             final Map<String, String> settings = new HashMap<>();
-            settings.put("Kill Road Mobs", "" + Settings.KILL_ROAD_MOBS);
-            settings.put("Use Metrics", "" + Settings.METRICS);
-            settings.put("Delete Plots On Ban", "" + Settings.DELETE_PLOTS_ON_BAN);
-            settings.put("Mob Pathfinding", "" + Settings.MOB_PATHFINDING);
-            settings.put("DB Mysql Enabled", "" + Settings.DB.USE_MYSQL);
-            settings.put("DB SQLite Enabled", "" + Settings.DB.USE_SQLITE);
-            settings.put("Auto Clear Enabled", "" + Settings.AUTO_CLEAR);
-            settings.put("Auto Clear Days", "" + Settings.AUTO_CLEAR_DAYS);
-            settings.put("Schematics Save Path", "" + Settings.SCHEMATIC_SAVE_PATH);
-            settings.put("API Location", "" + Settings.API_URL);
+            settings.put("是否杀死道路的怪物", "" + Settings.KILL_ROAD_MOBS);
+            settings.put("是否使用数据统计", "" + Settings.METRICS);
+            settings.put("是否删除被封禁玩家的地皮", "" + Settings.DELETE_PLOTS_ON_BAN);
+            settings.put("怪物寻路是否启用", "" + Settings.MOB_PATHFINDING);
+            settings.put("Mysql数据库是否启用", "" + Settings.DB.USE_MYSQL);
+            settings.put("SQLite数据库是否启用", "" + Settings.DB.USE_SQLITE);
+            settings.put("自动清理地皮是否启用", "" + Settings.AUTO_CLEAR);
+            settings.put("自动清理天数", "" + Settings.AUTO_CLEAR_DAYS);
+            settings.put("建筑文件保存位置", "" + Settings.SCHEMATIC_SAVE_PATH);
+            settings.put("API 链接地址", "" + Settings.API_URL);
             for (final Entry<String, String> setting : settings.entrySet()) {
-                log(C.PREFIX.s() + String.format("&cKey: &6%s&c, Value: &6%s", setting.getKey(), setting.getValue()));
+                log(C.PREFIX.s() + String.format("&c类型: &b%s, &c参数: &b%s", setting.getKey(), setting.getValue()));
             }
         }
     }

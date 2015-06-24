@@ -35,24 +35,24 @@ import com.intellectualcrafters.plot.util.SetupUtils;
 
 public class DebugSetup extends SubCommand {
     public DebugSetup() {
-        super("setup", "plots.admin.command.setup", "Plotworld setup command", "setup", "create", CommandCategory.ACTIONS, false);
+        super("setup", "plots.admin.command.setup", "地皮世界安装指令", "setup", "create", CommandCategory.ACTIONS, false);
     }
     
     public void displayGenerators(PlotPlayer plr) {
         StringBuffer message = new StringBuffer();
-        message.append("&6What generator do you want?");
+        message.append("&6你想要生成什么类型地皮?");
         for (Entry<String, ChunkGenerator> entry : SetupUtils.generators.entrySet()) {
             if (entry.getKey().equals("PlotSquared")) {
-                message.append("\n&8 - &2" + entry.getKey() + " (Default Generator)");
+                message.append("\n&8 - &2" + entry.getKey() + " (默认生成参数)");
             }
             else if (entry.getValue() instanceof HybridGen) {
-                message.append("\n&8 - &7" + entry.getKey() + " (Hybrid Generator)");
+                message.append("\n&8 - &7" + entry.getKey() + " (混合生成参数)");
             }
             else if (entry.getValue() instanceof PlotGenerator) {
-                message.append("\n&8 - &7" + entry.getKey() + " (Plot Generator)");
+                message.append("\n&8 - &7" + entry.getKey() + " (高级地皮生成参数)");
             }
             else {
-                message.append("\n&8 - &7" + entry.getKey() + " (Unknown structure)");
+                message.append("\n&8 - &7" + entry.getKey() + " (其他生成参数)");
             }
         }
         MainUtil.sendMessage(plr, message.toString());
@@ -79,7 +79,7 @@ public class DebugSetup extends SubCommand {
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("cancel")) {
                 SetupUtils.setupMap.remove(name);
-                MainUtil.sendMessage(plr, "&aCancelled setup");
+                MainUtil.sendMessage(plr, "&a取消了地皮安装");
                 return false;
             }
             if (args[0].equalsIgnoreCase("back")) {

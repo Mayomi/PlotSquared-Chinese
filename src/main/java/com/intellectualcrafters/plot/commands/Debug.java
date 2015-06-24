@@ -28,7 +28,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class Debug extends SubCommand {
     public Debug() {
-        super(Command.DEBUG, "Show debug information", "debug [msg]", CommandCategory.DEBUG, false);
+        super(Command.DEBUG, "显示调试信息", "debug [msg]", CommandCategory.DEBUG, false);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Debug extends SubCommand {
         if ((args.length > 0) && args[0].equalsIgnoreCase("msg")) {
             final StringBuilder msg = new StringBuilder();
             for (final C c : C.values()) {
-                msg.append(c.s()).append("\n");
+                msg.append(c.s()).append("");
             }
             MainUtil.sendMessage(plr, msg.toString());
             return true;
@@ -54,17 +54,17 @@ public class Debug extends SubCommand {
             for (final String world : PlotSquared.getPlotWorlds()) {
                 worlds.append(world).append(" ");
             }
-            information.append(header);
-            information.append(getSection(section, "Lag / TPS"));
-            information.append(getLine(line, "Ticks Per Second", Lag.getTPS()));
-            information.append(getLine(line, "Lag Percentage", (int) Lag.getPercentage() + "%"));
-            information.append(getLine(line, "TPS Percentage", (int) Lag.getFullPercentage() + "%"));
-            information.append(getSection(section, "PlotWorld"));
-            information.append(getLine(line, "Plot Worlds", worlds));
-            information.append(getLine(line, "Owned Plots", PlotSquared.getPlots().size()));
-            information.append(getSection(section, "Messages"));
-            information.append(getLine(line, "Total Messages", C.values().length));
-            information.append(getLine(line, "View all captions", "/plot debug msg"));
+            information.append(header+ "\n");
+            information.append(getSection(section, "插件调试信息显示")+ "\n");
+            information.append(getLine(line, "当前TPS", Lag.getTPS())+ "\n");
+            information.append(getLine(line, "滞后百分比", (int) Lag.getPercentage() + "%")+ "\n");
+            information.append(getLine(line, "TPS百分比", (int) Lag.getFullPercentage() + "%")+ "\n");
+            information.append(getSection(section, "地皮世界信息")+ "\n");
+            information.append(getLine(line, "地皮世界", worlds)+ "\n");
+            information.append(getLine(line, "拥有地皮", PlotSquared.getPlots().size())+ "\n");
+            information.append(getSection(section, "所有发送信息")+ "\n");
+            information.append(getLine(line, "信息总计", C.values().length)+ "\n");
+            information.append(getLine(line, "查看所有", "/plot debug msg")+ "\n");
         }
         {
             MainUtil.sendMessage(plr, information.toString());
@@ -73,10 +73,10 @@ public class Debug extends SubCommand {
     }
 
     private String getSection(final String line, final String val) {
-        return line.replaceAll("%val%", val) + "\n";
+        return line.replaceAll("%val%", val) ;
     }
 
     private String getLine(final String line, final String var, final Object val) {
-        return line.replaceAll("%var%", var).replaceAll("%val%", "" + val) + "\n";
+        return line.replaceAll("%var%", var).replaceAll("%val%", "" + val) ;
     }
 }

@@ -47,7 +47,7 @@ import com.intellectualcrafters.plot.util.TaskManager;
 
 public class Template extends SubCommand {
     public Template() {
-        super("template", "plots.admin", "Create or use a world template", "template", "", CommandCategory.DEBUG, false);
+        super("template", "plots.admin", "创建或使用世界模板", "template", "", CommandCategory.DEBUG, false);
     }
     
     @Override
@@ -55,22 +55,22 @@ public class Template extends SubCommand {
         if (args.length != 2 && args.length != 3) {
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("export")) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template export <world>");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template export <世界名称>");
                     return false;
                 }
                 else if (args[0].equalsIgnoreCase("import")) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template import <world> <template>");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template import <世界名称> <模板名称>");
                     return false;
                 }
             }
-            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template <import|export> <world> [template]");
+            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template <import|export> <世界名称> [模板名称]");
             return false;
         }
         final String world = args[1];
         switch (args[0].toLowerCase()) {
             case "import": {
                 if (args.length != 3) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template import <world> <template>");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template import <世界名称> <模板名称>");
                     return false;
                 }
                 if (PlotSquared.isPlotWorld(world)) {
@@ -119,7 +119,7 @@ public class Template extends SubCommand {
             }
             case "export": {
                 if (args.length != 2) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template export <world>");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot template export <世界名称>");
                     return false;
                 }
                 final PlotWorld plotworld = PlotSquared.getPlotWorld(world);
@@ -136,10 +136,10 @@ public class Template extends SubCommand {
                         }
                         catch (Exception e) {
                             e.printStackTrace();
-                            MainUtil.sendMessage(plr, "Failed: " + e.getMessage());
+                            MainUtil.sendMessage(plr, "失败: " + e.getMessage());
                             return;
                         }
-                        MainUtil.sendMessage(plr, "Done!");
+                        MainUtil.sendMessage(plr, "已完成!");
                     }
                 });
                 return true;

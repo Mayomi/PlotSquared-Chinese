@@ -8,11 +8,11 @@ import java.util.UUID;
  * @author Citymonstret
  */
 public interface OfflinePlotPlayer {
-    public UUID getUUID();
+    UUID getUUID();
     
-    public long getLastPlayed();
+    long getLastPlayed();
 
-    public boolean isOnline();
+    boolean isOnline();
 
-    public String getName();
+    String getName();
 }

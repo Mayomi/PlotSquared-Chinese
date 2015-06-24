@@ -121,7 +121,7 @@ public class MainCommand {
                 for (final SubCommand.CommandCategory category : SubCommand.CommandCategory.values()) {
                     builder.append("\n").append(C.HELP_INFO_ITEM.s().replaceAll("%category%", category.toString().toLowerCase()).replaceAll("%category_desc%", category.toString()));
                 }
-                builder.append("\n").append(C.HELP_INFO_ITEM.s().replaceAll("%category%", "all").replaceAll("%category_desc%", "Display all commands"));
+                builder.append("\n").append(C.HELP_INFO_ITEM.s().replaceAll("%category%", "all").replaceAll("%category_desc%", "显示全部指令"));
                 return MainUtil.sendMessage(player, builder.toString());
             }
             final String cat = args[1];

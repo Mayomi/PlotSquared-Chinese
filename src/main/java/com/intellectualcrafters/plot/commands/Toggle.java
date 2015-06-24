@@ -26,11 +26,11 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class Toggle extends SubCommand {
     public Toggle() {
-        super(Command.TOGGLE, "Toggle per user settings", "toggle <setting>", CommandCategory.ACTIONS, true);
+        super(Command.TOGGLE, "切换每个玩家的设置", "toggle <设置>", CommandCategory.ACTIONS, true);
     }
     
     public void noArgs(PlotPlayer player) {
-        MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot toggle <setting>");
+        MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot toggle <设置>");
         MainUtil.sendMessage(player, C.SUBCOMMAND_SET_OPTIONS_HEADER.s() + "titles");
     }
 

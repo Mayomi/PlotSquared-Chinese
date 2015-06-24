@@ -163,6 +163,7 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
         return (version[0] > major) || ((version[0] == major) && (version[1] > minor)) || ((version[0] == major) && (version[1] == minor) && (version[2] >= minor2));
     }
 
+
     @Override
     public void onEnable() {
         THIS = this;
@@ -171,12 +172,12 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
             try {
                 final Metrics metrics = new Metrics(this);
                 metrics.start();
-                log(C.PREFIX.s() + "&6Metrics enabled.");
+                log(C.PREFIX.s() + "&6数据统计收集功能已启用.");
             } catch (final Exception e) {
-                log(C.PREFIX.s() + "&cFailed to load up metrics.");
+                log(C.PREFIX.s() + "&c数据统计收集功能无法启用.");
             }
         } else {
-            log("&dUsing metrics will allow us to improve the plugin, please consider it :)");
+            log("&d请开启数据统计收集功能 以帮助我们做的更好");
         }
         List<World> worlds = Bukkit.getWorlds();
         if (worlds.size() > 0) {
@@ -185,7 +186,7 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
                 try {
                     SetGenCB.setGenerator(world);
                 } catch (Exception e) {
-                    log("Failed to reload world: " + world.getName());
+                    log("重读世界  " + world.getName() + "失败");
                     Bukkit.getServer().unloadWorld(world, false);
                 }
             }
@@ -302,7 +303,7 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
         final BukkitCommand bcmd = new BukkitCommand();
         final PluginCommand plotCommand = getCommand("plots");
         plotCommand.setExecutor(bcmd);
-        plotCommand.setAliases(Arrays.asList("p", "ps", "plotme", "plot"));
+        plotCommand.setAliases(Arrays.asList("p", "ps", "plotme", "plot", "p2"));
         plotCommand.setTabCompleter(bcmd);
     }
 
@@ -318,7 +319,7 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
 
     @Override
     public void runEntityTask() {
-        log(C.PREFIX.s() + "KillAllEntities started.");
+        log(C.PREFIX.s() + "杀死实体功能已开启.");
         TaskManager.runTaskRepeat(new Runnable() {
             long ticked = 0l;
             long error = 0l;
@@ -328,7 +329,7 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
                 if (this.ticked > 36_000L) {
                     this.ticked = 0l;
                     if (this.error > 0) {
-                        log(C.PREFIX.s() + "KillAllEntities has been running for 6 hours. Errors: " + this.error);
+                        log(C.PREFIX.s() + "杀死实体功能已运行6小时. 错误: " + this.error);
                     }
                     this.error = 0l;
                 }
@@ -409,9 +410,9 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
             PlotSquared.worldEdit = (WorldEditPlugin) getServer().getPluginManager().getPlugin("WorldEdit");
             final String version = PlotSquared.worldEdit.getDescription().getVersion();
             if ((version != null) && version.startsWith("5.")) {
-                log("&cThis version of WorldEdit does not support PlotSquared.");
-                log("&cPlease use WorldEdit 6+ for masking support");
-                log("&c - http://builds.enginehub.org/job/worldedit");
+                log("&cPlotSquared地皮插件需要更高版本的WorldEdit.");
+                log("&c请下载WorldEdit 6+ 版本的插件");
+                log("&c下载地址 - http://builds.enginehub.org/job/worldedit");
             } else {
                 getServer().getPluginManager().registerEvents(new WEListener(), this);
                 WorldEdit.getInstance().getEventBus().register(new WESubscriber());
@@ -428,7 +429,7 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
                 return econ;
             }
         }
-        catch (Throwable e) {};
+        catch (Throwable e) {}
         return null;
     }
 
@@ -469,10 +470,7 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
                 }
             }
         }, 20);
-        if (Bukkit.getPluginManager().getPlugin("PlotMe") != null || Bukkit.getPluginManager().getPlugin("AthionPlots") != null) {
-            return true;
-        }
-        return false;
+        return Bukkit.getPluginManager().getPlugin("PlotMe") != null || Bukkit.getPluginManager().getPlugin("AthionPlots") != null;
     }
 
     @Override
@@ -519,7 +517,7 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
             Settings.OFFLINE_MODE = true;
         }
         if (!checkVersion) {
-            log(C.PREFIX.s() + " &c[WARN] Titles are disabled - please update your version of Bukkit to support this feature.");
+            log(C.PREFIX.s() + " &c[警告] Titles 功能将被禁用 - 该功能仅支持服务端1.8+.");
             Settings.TITLES = false;
             FlagManager.removeFlag(FlagManager.getFlag("titles"));
         } else {
@@ -533,9 +531,9 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
             }
         }
         if (Settings.OFFLINE_MODE) {
-            log(C.PREFIX.s() + " &6PlotSquared is using Offline Mode UUIDs either because of user preference, or because you are using an old version of Bukkit");
+            log(C.PREFIX.s() + " &6PlotSquared 根据配置文件而使用了离线模式UUID, 或因为服务端版本过老");
         } else {
-            log(C.PREFIX.s() + " &6PlotSquared is using online UUIDs");
+            log(C.PREFIX.s() + " &6PlotSquared 使用了在线模式UUID");
         }
         return UUIDHandler.uuidWrapper;
     }

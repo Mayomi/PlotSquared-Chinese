@@ -46,7 +46,7 @@ public class SchematicCmd extends SubCommand {
     private int task;
 
     public SchematicCmd() {
-        super("schematic", "plots.schematic", "Schematic Command", "schematic {arg}", "sch", CommandCategory.ACTIONS, false);
+        super("schematic", "plots.schematic", "建筑文件指令", "schematic {arg}", "sch", CommandCategory.ACTIONS, false);
         // TODO command to fetch schematic from worldedit directory
     }
 
@@ -80,7 +80,7 @@ public class SchematicCmd extends SubCommand {
                     break;
                 }
                 if (this.running) {
-                    MainUtil.sendMessage(plr, "&cTask is already running.");
+                    MainUtil.sendMessage(plr, "&c进程已经开始.");
                     return false;
                 }
                 final String file2 = args[1];
@@ -92,7 +92,7 @@ public class SchematicCmd extends SubCommand {
                         try {
                             final Schematic schematic = SchematicHandler.manager.getSchematic(file2);
                             if (schematic == null) {
-                                sendMessage(plr, C.SCHEMATIC_INVALID, "non-existent or not in gzip format");
+                                sendMessage(plr, C.SCHEMATIC_INVALID, "不存在或者不在gzip格式");
                                 SchematicCmd.this.running = false;
                                 return;
                             }
@@ -103,7 +103,7 @@ public class SchematicCmd extends SubCommand {
                             final Location bot = MainUtil.getPlotBottomLoc(loc.getWorld(), plot2.id).add(1, 0, 1);
                             final int length2 = MainUtil.getPlotWidth(loc.getWorld(), plot2.id);
                             if ((dem.getX() > length2) || (dem.getZ() > length2)) {
-                                sendMessage(plr, C.SCHEMATIC_INVALID, String.format("Wrong size (x: %s, z: %d) vs %d ", dem.getX(), dem.getZ(), length2));
+                                sendMessage(plr, C.SCHEMATIC_INVALID, String.format("错误的大小 (x: %s, z: %d) vs %d ", dem.getX(), dem.getZ(), length2));
                                 SchematicCmd.this.running = false;
                                 return;
                             }
@@ -151,7 +151,7 @@ public class SchematicCmd extends SubCommand {
                         catch (Exception e) {
                             e.printStackTrace();
                             SchematicCmd.this.running = false;
-                            MainUtil.sendMessage(plr, "&cAn error occured, see console for more information");
+                            MainUtil.sendMessage(plr, "&c发生了一个错误, 请在控制台获取更多信息");
                         }
                     }
                 });
@@ -173,7 +173,7 @@ public class SchematicCmd extends SubCommand {
                 file = args[1];
                 schematic = SchematicHandler.manager.getSchematic(file);
                 if (schematic == null) {
-                    sendMessage(plr, C.SCHEMATIC_INVALID, "non-existent");
+                    sendMessage(plr, C.SCHEMATIC_INVALID, "不存在");
                     break;
                 }
                 final Location loc = plr.getLocation();
@@ -182,7 +182,7 @@ public class SchematicCmd extends SubCommand {
                 final Plot plot = MainUtil.getPlot(loc);
                 final int length = MainUtil.getPlotWidth(loc.getWorld(), plot.id);
                 if ((l1 < length) || (l2 < length)) {
-                    sendMessage(plr, C.SCHEMATIC_INVALID, String.format("Wrong size (x: %s, z: %d) vs %d ", l1, l2, length));
+                    sendMessage(plr, C.SCHEMATIC_INVALID, String.format("错误的大小 (x: %s, z: %d) vs %d ", l1, l2, length));
                     break;
                 }
                 sendMessage(plr, C.SCHEMATIC_VALID);
@@ -195,28 +195,28 @@ public class SchematicCmd extends SubCommand {
                     return false;
                 }
                 if (args.length != 2) {
-                    MainUtil.sendMessage(null, "&cNeed world arg. Use &7/plots sch exportall <world>");
+                    MainUtil.sendMessage(null, "&c需要世界参数. 指令 &7/plots sch exportall <世界名称>");
                     return false;
                 }
                 final HashMap<PlotId, Plot> plotmap = PlotSquared.getPlots(args[1]);
                 if ((plotmap == null) || (plotmap.size() == 0)) {
-                    MainUtil.sendMessage(plr, "&cInvalid world. Use &7/plots sch exportall <world>");
+                    MainUtil.sendMessage(plr, "&c无效的世界. Use &7/plots sch exportall <世界名称>");
                     return false;
                 }
                 Collection<Plot> plots = plotmap.values();
                 boolean result = SchematicHandler.manager.exportAll(plots, null, null, new Runnable() {
 					@Override
 					public void run() {
-						MainUtil.sendMessage(plr, "&aFinished mass export");
+						MainUtil.sendMessage(plr, "&a批量输出完成");
 					}
 				});
                 if (!result) {
-                	MainUtil.sendMessage(plr, "&cTask is already running.");
+                	MainUtil.sendMessage(plr, "&c进程正在运行.");
                     return false;
                 }
                 else {
-                	PlotSquared.log("&3PlotSquared&8->&3Schemaitc&8: &7Mass export has started. This may take a while.");
-                    PlotSquared.log("&3PlotSquared&8->&3Schemaitc&8: &7Found &c" + plotmap.size() + "&7 plots...");
+                	PlotSquared.log("&3PlotSquared&8->&3建筑文件&8: &7批量输出已开始. 该过程需要一些时间...");
+                    PlotSquared.log("&3PlotSquared&8->&3建筑文件&8: &7发现了 &c" + plotmap.size() + "&7 块地皮...");
                 }
                 break;
             }
@@ -227,7 +227,7 @@ public class SchematicCmd extends SubCommand {
                     return false;
                 }
                 if (this.running) {
-                    MainUtil.sendMessage(plr, "&cTask is already running.");
+                    MainUtil.sendMessage(plr, "&c进程已经开始.");
                     return false;
                 }
                 final String world;
@@ -251,16 +251,16 @@ public class SchematicCmd extends SubCommand {
                             final String[] split = args[2].split(";");
                             final PlotId i = new PlotId(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
                             if ((PlotSquared.getPlots(world) == null) || (PlotSquared.getPlots(world).get(i) == null)) {
-                                MainUtil.sendMessage(null, "&cInvalid world or id. Use &7/plots sch save <world> <id>");
+                                MainUtil.sendMessage(null, "&c无效的世界或地皮ID. 指令 &7/plots sch save <世界名称> <地皮ID>");
                                 return false;
                             }
                             p2 = PlotSquared.getPlots(world).get(i);
                         } catch (final Exception e) {
-                            MainUtil.sendMessage(null, "&cInvalid world or id. Use &7/plots sch save <world> <id>");
+                            MainUtil.sendMessage(null, "&c无效的世界或地皮ID. 指令 &7/plots sch save <世界名称> <地皮ID>");
                             return false;
                         }
                     } else {
-                        MainUtil.sendMessage(null, "&cInvalid world or id. Use &7/plots sch save <world> <id>");
+                        MainUtil.sendMessage(null, "&c无效的世界或地皮ID. 指令 &7/plots sch save <世界名称> <地皮ID>");
                         return false;
                     }
                 }
@@ -270,16 +270,16 @@ public class SchematicCmd extends SubCommand {
                 boolean result = SchematicHandler.manager.exportAll(plots, null, null, new Runnable() {
 					@Override
 					public void run() {
-						MainUtil.sendMessage(plr, "&aFinished export");
+						MainUtil.sendMessage(plr, "&a输出完成");
 						SchematicCmd.this.running = false;
 					}
 				});
                 if (!result) {
-                	MainUtil.sendMessage(plr, "&cTask is already running.");
+                	MainUtil.sendMessage(plr, "&c进程已经开始.");
                     return false;
                 }
                 else {
-                	MainUtil.sendMessage(plr, "&7Starting export...");
+                	MainUtil.sendMessage(plr, "&7正在开始输出文件...");
                 }
                 break;
             }

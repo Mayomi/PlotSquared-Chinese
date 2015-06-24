@@ -23,7 +23,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
  */
 public class Database extends SubCommand {
     public Database() {
-        super(Command.DATABASE, "Convert/Backup Storage", "database [type] [...details]", CommandCategory.DEBUG, false);
+        super(Command.DATABASE, "转换/备份 存储方式", "database [类型] [...细节]", CommandCategory.DEBUG, false);
     }
 
     private static boolean sendMessageU(final UUID uuid, final String msg) {
@@ -50,15 +50,15 @@ public class Database extends SubCommand {
                     for (final Plot p : plots) {
                         ps.add(p);
                     }
-                    sendMessageU(requester, "&6Starting...");
+                    sendMessageU(requester, "&6已开始...");
                     manager.createPlotsAndData(ps, new Runnable() {
                         @Override
                         public void run() {
-                            sendMessageU(requester, "&6Database conversion finished!");
+                            sendMessageU(requester, "&6数据库转换成功!");
                         }
                     });
                 } catch (final Exception e) {
-                    sendMessageU(requester, "Failed to insert plot objects, see stacktrace for info");
+                    sendMessageU(requester, "无法插入地皮表单, 请查看报错信息");
                     e.printStackTrace();
                 }
                 try {
@@ -79,7 +79,7 @@ public class Database extends SubCommand {
         switch (type) {
             case "mysql":
                 if (args.length < 6) {
-                    return sendMessage(plr, "/plot database mysql [host] [port] [username] [password] [database] {prefix}");
+                    return sendMessage(plr, "/plot database mysql [数据库地址] [数据库端口] [数据库用户名] [数据库密码] [数据库名] {表单前缀}");
                 }
                 final String host = args[1];
                 final String port = args[2];
@@ -95,18 +95,18 @@ public class Database extends SubCommand {
                     n = new MySQL(PlotSquared.THIS, host, port, database, username, password).openConnection();
                     // Connection
                     if (n.isClosed()) {
-                        return sendMessage(plr, "Failed to open connection");
+                        return sendMessage(plr, "无法打开连接");
                     }
                 } catch (SQLException | ClassNotFoundException e) {
                     e.printStackTrace();
-                    return sendMessage(plr, "Failed to open connection, read stacktrace for info");
+                    return sendMessage(plr, "无法打开连接, 请查看报错信息");
                 }
                 final SQLManager manager = new SQLManager(n, prefix);
                 try {
                     manager.createTables(Settings.DB.USE_MYSQL ? "mysql" : "sqlite");
                 } catch (final SQLException e) {
                     e.printStackTrace();
-                    return sendMessage(plr, "Could not create the required tables and/or load the database") && sendMessage(plr, "Please see the stacktrace for more information");
+                    return sendMessage(plr, "无法读取数据库或无法创建表单") && sendMessage(plr, "请查看报错信息");
                 }
                 UUID requester = null;
                 if (plr != null) {
@@ -116,12 +116,12 @@ public class Database extends SubCommand {
                 break;
             case "sqlite":
                 if (args.length < 2) {
-                    return sendMessage(plr, "/plot database sqlite [file name]");
+                    return sendMessage(plr, "/plot database sqlite [文件名称]");
                 }
-                sendMessage(plr, "This is not supported yet");
+                sendMessage(plr, "这个暂时不支持");
                 break;
             default:
-                return sendMessage(plr, "Unknown database type");
+                return sendMessage(plr, "未知数据库类型");
         }
         return false;
     }

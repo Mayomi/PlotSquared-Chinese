@@ -37,7 +37,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class Clear extends SubCommand {
     public Clear() {
-        super(Command.CLEAR, "Clear a plot", "clear", CommandCategory.ACTIONS, false);
+        super(Command.CLEAR, "清理一块地皮", "clear", CommandCategory.ACTIONS, false);
     }
 
     @Override
@@ -45,25 +45,25 @@ public class Clear extends SubCommand {
         if (plr == null) {
             // Is console
             if (args.length < 2) {
-                PlotSquared.log("You need to specify two arguments: ID (0;0) & World (world)");
+                PlotSquared.log("你需要指定2个参数: ID (0;0) 和 世界 (世界名称)");
             } else {
                 final PlotId id = PlotId.fromString(args[0]);
                 final String world = args[1];
                 if (id == null) {
-                    PlotSquared.log("Invalid Plot ID: " + args[0]);
+                    PlotSquared.log("无效的地皮 ID: " + args[0]);
                 } else {
                     if (!PlotSquared.isPlotWorld(world)) {
-                        PlotSquared.log("Invalid plot world: " + world);
+                        PlotSquared.log("无效的地皮世界: " + world);
                     } else {
                         final Plot plot = MainUtil.getPlot(world, id);
                         if (plot == null) {
-                            PlotSquared.log("Could not find plot " + args[0] + " in world " + world);
+                            PlotSquared.log("没有在世界 " + world + " 中找到地皮 " + args[0] );
                         } else {
                             Runnable runnable = new Runnable() {
                                 @Override
                                 public void run() {
                                     MainUtil.clear(world, plot, plot.owner == null, null);
-                                    PlotSquared.log("Plot " + plot.getId().toString() + " cleared.");
+                                    PlotSquared.log("Plot " + plot.getId().toString() + " 被清理了.");
                                 }
                             };
                             if (Settings.CONFIRM_CLEAR && !(Permissions.hasPermission(plr, "plots.confirm.bypass"))) {

@@ -35,13 +35,13 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class Deny extends SubCommand {
     public Deny() {
-        super(Command.DENY, "Deny a user from a plot", "deny <player>", CommandCategory.ACTIONS, true);
+        super(Command.DENY, "将一名玩家添加至该地皮黑名单", "deny <玩家名称>", CommandCategory.ACTIONS, true);
     }
 
     @Override
     public boolean execute(final PlotPlayer plr, final String... args) {
         if (args.length != 1) {
-            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot deny <player>");
+            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot deny <玩家名称>");
             return true;
         }
         final Location loc = plr.getLocation();

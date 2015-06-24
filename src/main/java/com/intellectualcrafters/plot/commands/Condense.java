@@ -40,7 +40,7 @@ public class Condense extends SubCommand {
     public static boolean TASK = false;
 
     public Condense() {
-        super("condense", "plots.admin", "Condense a plotworld", "condense", "", CommandCategory.DEBUG, false);
+        super("condense", "plots.admin", "冻结一块地皮", "condense", "", CommandCategory.DEBUG, false);
     }
 
     @Override
@@ -50,30 +50,30 @@ public class Condense extends SubCommand {
             return false;
         }
         if ((args.length != 2) && (args.length != 3)) {
-            MainUtil.sendMessage(plr, "/plot condense <world> <start|stop|info> [radius]");
+            MainUtil.sendMessage(plr, "/plot condense <世界> <start|stop|info> [半径]");
             return false;
         }
         final String worldname = args[0];
         if (!BlockManager.manager.isWorld(worldname) || !PlotSquared.isPlotWorld(worldname)) {
-            MainUtil.sendMessage(plr, "INVALID WORLD");
+            MainUtil.sendMessage(plr, "无效的世界");
             return false;
         }
         switch (args[1].toLowerCase()) {
             case "start": {
                 if (args.length == 2) {
-                    MainUtil.sendMessage(plr, "/plot condense " + worldname + " start <radius>");
+                    MainUtil.sendMessage(plr, "/plot condense " + worldname + " start <半径>");
                     return false;
                 }
                 if (TASK) {
-                    MainUtil.sendMessage(plr, "TASK ALREADY STARTED");
+                    MainUtil.sendMessage(plr, "进程已经开始了");
                     return false;
                 }
                 if (args.length == 2) {
-                    MainUtil.sendMessage(plr, "/plot condense " + worldname + " start <radius>");
+                    MainUtil.sendMessage(plr, "/plot condense " + worldname + " start <半径>");
                     return false;
                 }
                 if (!StringUtils.isNumeric(args[2])) {
-                    MainUtil.sendMessage(plr, "INVALID RADIUS");
+                    MainUtil.sendMessage(plr, "无效的半径");
                     return false;
                 }
                 final int radius = Integer.parseInt(args[2]);
@@ -81,7 +81,7 @@ public class Condense extends SubCommand {
                 final int size = plots.size();
                 final int minimum_radius = (int) Math.ceil((Math.sqrt(size) / 2) + 1);
                 if (radius < minimum_radius) {
-                    MainUtil.sendMessage(plr, "RADIUS TOO SMALL");
+                    MainUtil.sendMessage(plr, "半径过小了");
                     return false;
                 }
                 final List<PlotId> to_move = new ArrayList<>(getPlots(plots, radius));
@@ -95,14 +95,14 @@ public class Condense extends SubCommand {
                     start = Auto.getNextPlot(start, 1);
                 }
                 if (free.size() == 0 || to_move.size() == 0) {
-                    MainUtil.sendMessage(plr, "NO PLOTS FOUND");
+                    MainUtil.sendMessage(plr, "没有发现地皮");
                     return false;
                 }
                MainUtil.move(MainUtil.getPlot(worldname, to_move.get(0)), MainUtil.getPlot(worldname, free.get(0)), new Runnable() {
                     @Override
                     public void run() {
                         if (!TASK) {
-                            sendMessage("CONDENSE TASK CANCELLED");
+                            sendMessage("进程被取消了");
                             return;
                         }
                         to_move.remove(0);
@@ -130,12 +130,12 @@ public class Condense extends SubCommand {
                             free.remove(0);
                         }
                         if (to_move.size() == 0) {
-                            sendMessage("TASK COMPLETE. PLEASE VERIFY THAT NO NEW PLOTS HAVE BEEN CLAIMED DURING TASK.");
+                            sendMessage("冻结完成. 请确认在进程中没有人认领新的地皮.");
                             TASK = false;
                             return;
                         }
                         if (free.size() == 0) {
-                            sendMessage("TASK FAILED. NO FREE PLOTS FOUND!");
+                            sendMessage("冻结失败. 没有空闲的地皮!");
                             TASK = false;
                             return;
                         }
@@ -144,25 +144,25 @@ public class Condense extends SubCommand {
                     }
                 });
                 TASK = true;
-                MainUtil.sendMessage(plr, "TASK STARTED...");
+                MainUtil.sendMessage(plr, "进程开始...");
                 return true;
             }
             case "stop": {
                 if (!TASK) {
-                    MainUtil.sendMessage(plr, "TASK ALREADY STOPPED");
+                    MainUtil.sendMessage(plr, "进程正在停止");
                     return false;
                 }
                 TASK = false;
-                MainUtil.sendMessage(plr, "TASK STOPPED");
+                MainUtil.sendMessage(plr, "进程被终止");
                 return true;
             }
             case "info": {
                 if (args.length == 2) {
-                    MainUtil.sendMessage(plr, "/plot condense " + worldname + " info <radius>");
+                    MainUtil.sendMessage(plr, "/plot condense " + worldname + " info <半径>");
                     return false;
                 }
                 if (!StringUtils.isNumeric(args[2])) {
-                    MainUtil.sendMessage(plr, "INVALID RADIUS");
+                    MainUtil.sendMessage(plr, "无效的半径");
                     return false;
                 }
                 final int radius = Integer.parseInt(args[2]);
@@ -170,23 +170,23 @@ public class Condense extends SubCommand {
                 final int size = plots.size();
                 final int minimum_radius = (int) Math.ceil((Math.sqrt(size) / 2) + 1);
                 if (radius < minimum_radius) {
-                    MainUtil.sendMessage(plr, "RADIUS TOO SMALL");
+                    MainUtil.sendMessage(plr, "半径过小");
                     return false;
                 }
                 final int max_move = getPlots(plots, minimum_radius).size();
                 final int user_move = getPlots(plots, radius).size();
-                MainUtil.sendMessage(plr, "=== DEFAULT EVAL ===");
-                MainUtil.sendMessage(plr, "MINIMUM RADIUS: " + minimum_radius);
-                MainUtil.sendMessage(plr, "MAXIMUM MOVES: " + max_move);
-                MainUtil.sendMessage(plr, "=== INPUT EVAL ===");
-                MainUtil.sendMessage(plr, "INPUT RADIUS: " + radius);
-                MainUtil.sendMessage(plr, "ESTIMATED MOVES: " + user_move);
-                MainUtil.sendMessage(plr, "ESTIMATED TIME: " + "No idea, times will drastically change based on the system performance and load");
+                MainUtil.sendMessage(plr, "=== 默认信息 ===");
+                MainUtil.sendMessage(plr, "最小半径: " + minimum_radius);
+                MainUtil.sendMessage(plr, "最大范围: " + max_move);
+                MainUtil.sendMessage(plr, "=== 输出信息 ===");
+                MainUtil.sendMessage(plr, "输出半径: " + radius);
+                MainUtil.sendMessage(plr, "预计范围: " + user_move);
+                MainUtil.sendMessage(plr, "预计时间: " + "该功能暂时不可用");
                 MainUtil.sendMessage(plr, "&e - Radius is measured in plot width");
                 return true;
             }
         }
-        MainUtil.sendMessage(plr, "/plot condense " + worldname + " <start|stop|info> [radius]");
+        MainUtil.sendMessage(plr, "/plot condense " + worldname + " <start|stop|info> [半径]");
         return false;
     }
 
@@ -201,6 +201,6 @@ public class Condense extends SubCommand {
     }
 
     public static void sendMessage(final String message) {
-        PlotSquared.log("&3PlotSquared -> Plot condense&8: &7" + message);
+        PlotSquared.log("&3PlotSquared -> 地皮冻结&8: &7" + message);
     }
 }

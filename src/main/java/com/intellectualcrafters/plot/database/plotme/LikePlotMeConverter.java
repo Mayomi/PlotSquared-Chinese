@@ -102,7 +102,7 @@ public class LikePlotMeConverter {
             content = content.replaceAll("PlotMe-DefaultGenerator", "PlotSquared");
             content = content.replaceAll(plugin, "PlotSquared");
             Files.write(path, content.getBytes(charset));
-        } catch (Exception e) {};
+        } catch (Exception e) {}
     }
     
     public boolean run(final APlotMeConnector connector) {
@@ -136,6 +136,7 @@ public class LikePlotMeConverter {
             sendMessage("Updating bukkit.yml");
             updateWorldYml(plugin, "bukkit.yml");
             updateWorldYml(plugin, "plugins/Multiverse-Core/worlds.yml");
+            
             for (final String world : plotConfig.getConfigurationSection("worlds").getKeys(false)) {
                 sendMessage("Copying config for: " + world);
                 try {

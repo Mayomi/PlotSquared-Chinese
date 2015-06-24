@@ -31,7 +31,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class DebugRoadRegen extends SubCommand {
     public DebugRoadRegen() {
-        super(Command.DEBUGROADREGEN, "Regenerate all road schematic in your current chunk", "debugroadregen", CommandCategory.DEBUG, true);
+        super(Command.DEBUGROADREGEN, "在当前区块重建全部的道路", "debugroadregen", CommandCategory.DEBUG, true);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class DebugRoadRegen extends SubCommand {
         }
         final ChunkLoc chunk = new ChunkLoc(loc.getX() >> 4, loc.getZ() >> 4);
         final boolean result = HybridUtils.manager.regenerateRoad(world, chunk, 0);
-        MainUtil.sendMessage(player, "&6Regenerating chunk: " + chunk.x + "," + chunk.z + "\n&6 - Result: " + (result == true ? "&aSuccess" : "&cFailed"));
+        MainUtil.sendMessage(player, "&6重建区块: " + chunk.x + "," + chunk.z + "\n&6 - 结果: " + (result == true ? "&a成功" : "&c失败"));
         return true;
     }
 }

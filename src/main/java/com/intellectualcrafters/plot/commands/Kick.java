@@ -32,7 +32,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 @SuppressWarnings({ "unused", "deprecation", "javadoc" })
 public class Kick extends SubCommand {
     public Kick() {
-        super(Command.KICK, "Kick a player from your plot", "kick", CommandCategory.ACTIONS, true);
+        super(Command.KICK, "从你的地皮中踢出一个玩家", "kick", CommandCategory.ACTIONS, true);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Kick extends SubCommand {
             return false;
         }
         if (args.length != 1) {
-            MainUtil.sendMessage(plr, "&c/plot kick <player>");
+            MainUtil.sendMessage(plr, "&c/plot kick <玩家名称>");
             return false;
         }
         final PlotPlayer player = UUIDHandler.getPlayer(args[0]);

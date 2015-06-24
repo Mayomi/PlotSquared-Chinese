@@ -37,7 +37,7 @@ import com.intellectualcrafters.plot.util.Permissions;
  */
 public class Move extends SubCommand {
     public Move() {
-        super(Command.MOVE, "Move a plot", "debugmove", CommandCategory.ACTIONS, true);
+        super(Command.MOVE, "移动到一个地皮", "debugmove", CommandCategory.ACTIONS, true);
     }
 
     @Override

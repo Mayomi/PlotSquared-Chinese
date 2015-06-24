@@ -139,7 +139,7 @@ public class AugmentedPopulator extends BlockPopulator {
                             else {
                                 data = 0;
                             }
-                            BukkitSetBlockManager.setBlockManager.set(world, x, y, z, blocks.get(y), (byte) data);
+                            BukkitSetBlockManager.setBlockManager.set(world, x, y, z, blocks.get(y), data);
                         }
                     }
                 }
@@ -163,7 +163,7 @@ public class AugmentedPopulator extends BlockPopulator {
                         int zz = loc.z - Z;
                         if (xx >= 0 && xx < 16) {
                             if (zz >= 0 && zz < 16) {
-                                BukkitSetBlockManager.setBlockManager.set(world, xx, y, zz, entry2.getValue(), (byte) data);
+                                BukkitSetBlockManager.setBlockManager.set(world, xx, y, zz, entry2.getValue(), data);
                             }
                         }
                     }
@@ -187,11 +187,7 @@ public class AugmentedPopulator extends BlockPopulator {
             return;
         }
         final boolean check;
-        if (!inX1 || !inX2 || !inZ1 || !inZ2) {
-            check = true;
-        } else {
-            check = false;
-        }
+        check = !inX1 || !inX2 || !inZ1 || !inZ2;
         if (this.plotworld.TERRAIN > 1) {
             final PlotId plot1 = this.manager.getPlotIdAbs(this.plotworld, x, 0, z);
             final PlotId plot2 = this.manager.getPlotIdAbs(this.plotworld, x2, 0, z2);

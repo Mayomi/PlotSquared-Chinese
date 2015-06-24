@@ -41,12 +41,12 @@ import com.intellectualcrafters.plot.util.Permissions;
  */
 public class Swap extends SubCommand {
     public Swap() {
-        super(Command.SWAP, "Swap two plots", "switch", CommandCategory.ACTIONS, true);
+        super(Command.SWAP, "交换两块地皮", "switch", CommandCategory.ACTIONS, true);
     }
 
     @Override
     public boolean execute(final PlotPlayer plr, final String... args) {
-        MainUtil.sendMessage(plr, "&cThis command has not been optimized for large selections yet. Please bug me if this becomes an issue.");
+        MainUtil.sendMessage(plr, "&c这个指令仅用于普通地皮, 不适用于被合并后的地皮. 如果有问题请联系我.");
         if (args.length < 1) {
             MainUtil.sendMessage(plr, C.NEED_PLOT_ID);
             MainUtil.sendMessage(plr, C.SWAP_SYNTAX);

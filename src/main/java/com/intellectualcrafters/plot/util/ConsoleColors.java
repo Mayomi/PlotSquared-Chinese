@@ -83,7 +83,7 @@ public class ConsoleColors {
         }
     }
 
-    static enum ConsoleColor {
+    enum ConsoleColor {
         RESET("\u001B[0m"),
         BLACK("\u001B[30m"),
         RED("\u001B[31m"),

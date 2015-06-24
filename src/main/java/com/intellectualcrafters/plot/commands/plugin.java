@@ -35,7 +35,7 @@ public class plugin extends SubCommand {
     public static String downloads, version;
 
     public plugin() {
-        super("plugin", "plots.use", "Show plugin information", "plugin", "version", CommandCategory.INFO, false);
+        super("plugin", "plots.use", "显示插件信息", "plugin", "version", CommandCategory.INFO, false);
     }
 
     public static void setup() {
@@ -93,11 +93,13 @@ public class plugin extends SubCommand {
             public void run() {
                 final ArrayList<String> strings = new ArrayList<String>() {
                     {
-                        add(String.format("&c>> &6PlotSquared (Version: %s)", PlotSquared.IMP.getVersion()));
-                        add(String.format("&c>> &6Made by Citymonstret and Empire92"));
-                        add(String.format("&c>> &6Download at &lhttp://www.spigotmc.org/resources/1177"));
-                        add(String.format("&c>> &cNewest Version (Spigot): %s", version));
-                        add(String.format("&c>> &cTotal Downloads (Spigot): %s", downloads));
+                        add(String.format("&c>> &6PlotSquared (当前版本: %s)", PlotSquared.IMP.getVersion()));
+                        add(String.format("&c>> &6插件作者 Citymonstret / Empire92"));
+                        add(String.format("&c>> &6中文授权 Mayomi"));
+                        add(String.format("&c>> &6下载地址 &lhttp://plugins.915mc.com/resources/14/"));
+                        add(String.format("&c>> &6源码地址 &lhttps://github.com/Mayomi/PlotSquared-Chinese"));
+                        add(String.format("&c>> &c最新版本 (Spigot): %s", version));
+                        add(String.format("&c>> &c总计下载 (Spigot): %s", downloads));
                     }
                 };
                 for (final String s : strings) {

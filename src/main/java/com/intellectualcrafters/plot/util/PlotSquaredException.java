@@ -33,7 +33,7 @@ public class PlotSquaredException extends RuntimeException {
         PlotSquared.log("&cPlotError &6>> &c" + error.getHeader() + ": &6" + details);
     }
 
-    public static enum PlotError {
+    public enum PlotError {
         PLOTMAIN_NULL("The PlotSquared instance was null"),
         MISSING_DEPENDENCY("Missing Dependency");
         private final String errorHeader;

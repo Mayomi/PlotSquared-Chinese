@@ -41,7 +41,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
  */
 public class Buy extends SubCommand {
     public Buy() {
-        super(Command.BUY, "Buy the plot you are standing on", "b", CommandCategory.CLAIMING, true);
+        super(Command.BUY, "购买你脚下的地皮", "b", CommandCategory.CLAIMING, true);
     }
 
     @Override

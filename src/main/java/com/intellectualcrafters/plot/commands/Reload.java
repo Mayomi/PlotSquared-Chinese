@@ -28,7 +28,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class Reload extends SubCommand {
     public Reload() {
-        super("reload", "plots.admin.command.reload", "Reload configurations", "reload", CommandCategory.INFO, false);
+        super("reload", "plots.admin.command.reload", "重读配置", "reload", CommandCategory.INFO, false);
     }
 
     @Override

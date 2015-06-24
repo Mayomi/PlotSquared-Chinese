@@ -37,7 +37,7 @@ import com.intellectualcrafters.plot.util.TaskManager;
  */
 public class Unlink extends SubCommand {
     public Unlink() {
-        super(Command.UNLINK, "Unlink a mega-plot", "unlink", CommandCategory.ACTIONS, true);
+        super(Command.UNLINK, "取消地皮合并", "unlink", CommandCategory.ACTIONS, true);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Unlink extends SubCommand {
             @Override
             public void run() {
                 if (!MainUtil.unlinkPlot(plot)) {
-                    MainUtil.sendMessage(plr, "&cUnlink has been cancelled");
+                    MainUtil.sendMessage(plr, "&c取消地皮合并被终止");
                     return;
                 }
                 MainUtil.sendMessage(plr, C.UNLINK_SUCCESS);
