@@ -89,6 +89,11 @@ public class AbstractFlag {
     public String toString() {
         return this.key;
     }
+    
+    @Override
+    public int hashCode() {
+        return this.key.hashCode();
+    }
 
     @Override
     public boolean equals(final Object other) {

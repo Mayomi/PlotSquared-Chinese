@@ -58,6 +58,10 @@ public class Settings {
      */
     public static boolean TNT_LISTENER = false;
     /**
+     * Redstone disabler
+     */
+    public static boolean REDSTONE_DISABLER = false;
+    /**
      * Check for falling blocks when pistons extend?
      */
     public static boolean PISTON_FALLING_BLOCK_CHECK = true;
@@ -161,8 +165,8 @@ public class Settings {
      * Use offline mode storage
      */
     public static boolean TWIN_MODE_UUID = false;
-    public static boolean OFFLINE_MODE = true;
-    public static boolean UUID_LOWERCASE = true;
+    public static boolean OFFLINE_MODE = false;
+    public static boolean UUID_LOWERCASE = false;
     /**
      * Command confirmation
      */
