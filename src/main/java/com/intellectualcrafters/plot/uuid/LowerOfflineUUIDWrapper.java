@@ -24,7 +24,7 @@ public class LowerOfflineUUIDWrapper extends UUIDWrapper {
 
     public LowerOfflineUUIDWrapper() {
         try {
-            this.getOnline = Server.class.getMethod("getOnlinePlayers");
+            this.getOnline = Server.class.getMethod("getOnlinePlayers", new Class[0]);
         } catch (final NoSuchMethodException e) {
             e.printStackTrace();
         } catch (final SecurityException e) {

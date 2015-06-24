@@ -39,7 +39,7 @@ import com.intellectualcrafters.plot.util.SchematicHandler.Schematic;
  */
 public class Claim extends SubCommand {
     public Claim() {
-        super(Command.CLAIM, "领取你脚下的地皮", "claim", CommandCategory.CLAIMING, true);
+        super(Command.CLAIM, "Claim the current plot you're standing on.", "claim", CommandCategory.CLAIMING, true);
     }
 
     public static boolean claimPlot(final PlotPlayer player, final Plot plot, final boolean teleport, final boolean auto) {
@@ -111,7 +111,7 @@ public class Claim extends SubCommand {
         if (!schematic.equals("")) {
             if (world.SCHEMATIC_CLAIM_SPECIFY) {
                 if (!world.SCHEMATICS.contains(schematic.toLowerCase())) {
-                    return sendMessage(plr, C.SCHEMATIC_INVALID, "不存在: " + schematic);
+                    return sendMessage(plr, C.SCHEMATIC_INVALID, "non-existent: " + schematic);
                 }
                 if (!Permissions.hasPermission(plr, "plots.claim." + schematic) && !plr.hasPermission("plots.admin.command.schematic")) {
                     return sendMessage(plr, C.NO_SCHEMATIC_PERMISSION, schematic);

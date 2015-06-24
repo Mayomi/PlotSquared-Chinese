@@ -33,7 +33,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
  */
 public class DebugSaveTest extends SubCommand {
     public DebugSaveTest() {
-        super(Command.DEBUGSAVETEST, "这个调试指令将强制重建所有数据库中的地皮", "debugsavetest", CommandCategory.DEBUG, false);
+        super(Command.DEBUGSAVETEST, "This debug command will force the recreation of all plots in the DB", "debugsavetest", CommandCategory.DEBUG, false);
     }
 
     @Override
@@ -41,15 +41,15 @@ public class DebugSaveTest extends SubCommand {
         if (plr == null) {
             final ArrayList<Plot> plots = new ArrayList<Plot>();
             plots.addAll(PlotSquared.getPlots());
-            MainUtil.sendMessage(null, "&6正在开始 `DEBUGSAVETEST`");
+            MainUtil.sendMessage(null, "&6Starting `DEBUGSAVETEST`");
             DBFunc.createPlotsAndData(plots, new Runnable() {
                 @Override
                 public void run() {
-                    MainUtil.sendMessage(null, "&6数据库同步完成!");
+                    MainUtil.sendMessage(null, "&6Database sync finished!");
                 }
             });
         } else {
-            MainUtil.sendMessage(plr, "这个指令只能通过控制台使用.");
+            MainUtil.sendMessage(plr, "This debug command can only be executed by console as it has been deemed unsafe if abused");
         }
         return true;
     }

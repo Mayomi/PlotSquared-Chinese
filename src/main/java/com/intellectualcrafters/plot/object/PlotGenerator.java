@@ -223,5 +223,5 @@ public abstract class PlotGenerator extends ChunkGenerator {
      * Feel free to extend BukkitSetupUtils and customize world creation
      * @param object
      */
-    public void processSetup(SetupObject object) {}
+    public void processSetup(SetupObject object) {};
 }

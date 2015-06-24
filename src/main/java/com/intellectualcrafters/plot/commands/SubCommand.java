@@ -163,31 +163,31 @@ public abstract class SubCommand {
          * 
          * Such as: /plot claim
          */
-        CLAIMING("claiming"),
+        CLAIMING("Claiming"),
         /**
          * Teleportation Commands
          * 
          * Such as: /plot visit
          */
-        TELEPORT("teleport"),
+        TELEPORT("Teleportation"),
         /**
          * Action Commands
          * 
          * Such as: /plot clear
          */
-        ACTIONS("actions"),
+        ACTIONS("Actions"),
         /**
          * Information Commands
          * 
          * Such as: /plot info
          */
-        INFO("info"),
+        INFO("Information"),
         /**
          * Debug Commands
          * 
          * Such as: /plot debug
          */
-        DEBUG("debug");
+        DEBUG("Debug");
         /**
          * The category name (Readable)
          */

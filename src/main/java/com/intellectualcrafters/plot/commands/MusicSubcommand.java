@@ -37,7 +37,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class MusicSubcommand extends SubCommand {
     public MusicSubcommand() {
-        super("music", "plots.music", "在地皮上播放CD", "music", "mus", CommandCategory.ACTIONS, true);
+        super("music", "plots.music", "Play music in plot", "music", "mus", CommandCategory.ACTIONS, true);
     }
 
     @Override
@@ -51,12 +51,12 @@ public class MusicSubcommand extends SubCommand {
             sendMessage(player, C.NO_PLOT_PERMS);
             return true;
         }
-        final org.bukkit.inventory.Inventory inventory = Bukkit.createInventory(null, 9, ChatColor.RED + "地皮音乐盒");
+        final org.bukkit.inventory.Inventory inventory = Bukkit.createInventory(null, 9, ChatColor.RED + "Plot Jukebox");
         for (final PlotPlusListener.RecordMeta meta : PlotPlusListener.RecordMeta.metaList) {
             final ItemStack stack = new ItemStack(meta.getMaterial());
             final ItemMeta itemMeta = stack.getItemMeta();
             itemMeta.setDisplayName(ChatColor.GOLD + meta.toString());
-            itemMeta.setLore(Arrays.asList(ChatColor.GRAY + "点击来播放CD"));
+            itemMeta.setLore(Arrays.asList(ChatColor.GRAY + "Click to play the record"));
             stack.setItemMeta(itemMeta);
             inventory.addItem(stack);
         }

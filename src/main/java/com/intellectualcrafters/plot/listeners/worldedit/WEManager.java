@@ -39,7 +39,10 @@ public class WEManager {
     }
     
     public static boolean intersects(RegionWrapper region1, RegionWrapper region2) {
-        return (region1.minX <= region2.maxX) && (region1.maxX >= region2.minX) && (region1.minZ <= region2.maxZ) && (region1.maxZ >= region2.minZ);
+        if ((region1.minX <= region2.maxX) && (region1.maxX >= region2.minX) && (region1.minZ <= region2.maxZ) && (region1.maxZ >= region2.minZ)) {
+            return true;
+        }
+        return false;
     }
     
     public static boolean regionContains(RegionWrapper selection, HashSet<RegionWrapper> mask) {

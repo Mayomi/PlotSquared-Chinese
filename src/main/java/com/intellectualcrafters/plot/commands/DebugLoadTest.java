@@ -32,7 +32,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
  */
 public class DebugLoadTest extends SubCommand {
     public DebugLoadTest() {
-        super(Command.DEBUGLOADTEST, "这个调试指令将强制重读所有数据库中的地皮", "debugloadtest", CommandCategory.DEBUG, false);
+        super(Command.DEBUGLOADTEST, "This debug command will force the reload of all plots in the DB", "debugloadtest", CommandCategory.DEBUG, false);
     }
 
     @Override
@@ -43,12 +43,12 @@ public class DebugLoadTest extends SubCommand {
                 fPlots.setAccessible(true);
                 fPlots.set(null, DBFunc.getPlots());
             } catch (final Exception e) {
-                PlotSquared.log("&3==== 请无视下方报错代码 &3====");
+                PlotSquared.log("&3===FAILED&3===");
                 e.printStackTrace();
-                PlotSquared.log("&3==== 请无视上方报错代码 &3====");
+                PlotSquared.log("&3===END OF STACKTRACE===");
             }
         } else {
-            MainUtil.sendMessage(plr, "&6这个指令只能通过控制台使用.");
+            MainUtil.sendMessage(plr, "&6This command can only be executed by console as it has been deemed unsafe if abused..");
         }
         return true;
     }

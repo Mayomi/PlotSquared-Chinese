@@ -34,7 +34,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class DebugClear extends SubCommand {
     public DebugClear() {
-        super(Command.DEBUGCLEAR, "使用 PlotSquared-HighSpeedAlgorithm™ 进行地皮清理", "debugclear", CommandCategory.DEBUG, false);
+        super(Command.DEBUGCLEAR, "Clear a plot using a fast experimental algorithm", "debugclear", CommandCategory.DEBUG, false);
     }
 
     @Override
@@ -42,19 +42,19 @@ public class DebugClear extends SubCommand {
         if (plr == null) {
             // Is console
             if (args.length < 2) {
-                PlotSquared.log("你需要指定参数: ID (0;0) 或 世界 (世界名称)");
+                PlotSquared.log("You need to specify two arguments: ID (0;0) & World (world)");
             } else {
                 final PlotId id = PlotId.fromString(args[0]);
                 final String world = args[1];
                 if (id == null) {
-                    PlotSquared.log("无效的地皮ID: " + args[0]);
+                    PlotSquared.log("Invalid Plot ID: " + args[0]);
                 } else {
                     if (!PlotSquared.isPlotWorld(world) || !(PlotSquared.getPlotWorld(world) instanceof SquarePlotWorld)) {
-                        PlotSquared.log("无效的地皮世界: " + world);
+                        PlotSquared.log("Invalid plot world: " + world);
                     } else {
                         final Plot plot = MainUtil.getPlot(world, id);
                         if (plot == null) {
-                            PlotSquared.log("没有在世界 " + world + " 中找到地皮 " + args[0]);
+                            PlotSquared.log("Could not find plot " + args[0] + " in world " + world);
                         } else {
                             final Location pos1 = MainUtil.getPlotBottomLoc(world, plot.id).add(1, 0, 1);
                             final Location pos2 = MainUtil.getPlotTopLoc(world, plot.id);
@@ -67,8 +67,8 @@ public class DebugClear extends SubCommand {
                                 @Override
                                 public void run() {
                                     MainUtil.runners.remove(plot);
-                                    PlotSquared.log("地皮 " + plot.getId().toString() + " 被清理了.");
-                                    PlotSquared.log("&a已完成!");
+                                    PlotSquared.log("Plot " + plot.getId().toString() + " cleared.");
+                                    PlotSquared.log("&aDone!");
                                 }
                             });
                         }
@@ -100,7 +100,7 @@ public class DebugClear extends SubCommand {
             @Override
             public void run() {
                 MainUtil.runners.remove(plot);
-                MainUtil.sendMessage(plr, "&a已完成!");
+                MainUtil.sendMessage(plr, "&aDone!");
             }
         });
         // sign

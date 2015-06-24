@@ -33,7 +33,7 @@ import com.intellectualcrafters.plot.util.Permissions;
 
 public class Unclaim extends SubCommand {
     public Unclaim() {
-        super(Command.UNCLAIM, "放弃领取地皮", "unclaim", CommandCategory.ACTIONS, true);
+        super(Command.UNCLAIM, "Unclaim a plot", "unclaim", CommandCategory.ACTIONS, true);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Unclaim extends SubCommand {
             DBFunc.delete(worldname, plot);
             // TODO set wall block
         } else {
-            MainUtil.sendMessage(plr, "地皮无法被取消领取.");
+            MainUtil.sendMessage(plr, "Plot removal has been denied.");
         }
         MainUtil.sendMessage(plr, C.UNCLAIM_SUCCESS);
         return true;

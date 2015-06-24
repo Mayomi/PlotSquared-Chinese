@@ -34,13 +34,13 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class Untrust extends SubCommand {
     public Untrust() {
-        super(Command.UNTRUST, "移除了一名可信玩家", "untrust <player>", CommandCategory.ACTIONS, true);
+        super(Command.UNTRUST, "Remove a trusted user from a plot", "untrust <player>", CommandCategory.ACTIONS, true);
     }
 
     @Override
     public boolean execute(final PlotPlayer plr, final String... args) {
         if (args.length != 1) {
-            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot untrust <玩家名称>");
+            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot untrust <player>");
             return true;
         }
         final Location loc = plr.getLocation();

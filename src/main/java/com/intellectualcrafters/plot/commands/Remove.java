@@ -34,13 +34,13 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class Remove extends SubCommand {
     public Remove() {
-        super(Command.REMOVE, "从地皮中移除玩家", "remove <玩家名称>", CommandCategory.ACTIONS, true);
+        super(Command.REMOVE, "Remove a player from a plot", "remove <player>", CommandCategory.ACTIONS, true);
     }
 
     @Override
     public boolean execute(final PlotPlayer plr, final String... args) {
         if (args.length != 1) {
-            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot remove <玩家名称>");
+            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot remove <player>");
             return true;
         }
         final Location loc = plr.getLocation();

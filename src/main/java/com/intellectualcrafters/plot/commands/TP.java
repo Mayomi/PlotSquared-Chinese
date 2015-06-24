@@ -37,7 +37,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
  */
 public class TP extends SubCommand {
     public TP() {
-        super(Command.TP, "传送到一个地皮", "tp {alias|id}", CommandCategory.TELEPORT, true);
+        super(Command.TP, "Teleport to a plot", "tp {alias|id}", CommandCategory.TELEPORT, true);
     }
 
     @Override

@@ -39,7 +39,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class DebugFixFlags extends SubCommand {
     public DebugFixFlags() {
-        super(Command.DEBUGFIXFLAGS, "尝试修复世界的所有标识", "debugclear", CommandCategory.DEBUG, false);
+        super(Command.DEBUGFIXFLAGS, "Attempt to fix all flags for a world", "debugclear", CommandCategory.DEBUG, false);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class DebugFixFlags extends SubCommand {
             return false;
         }
         if (args.length != 1) {
-            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot debugfixflags <世界名称>");
+            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot debugfixflags <world>");
             return false;
         }
         final String world = args[0];
@@ -57,7 +57,7 @@ public class DebugFixFlags extends SubCommand {
             MainUtil.sendMessage(plr, C.NOT_VALID_PLOT_WORLD, args[0]);
             return false;
         }
-        MainUtil.sendMessage(plr, "&8--- &6开始进程 &8 ---");
+        MainUtil.sendMessage(plr, "&8--- &6Starting task &8 ---");
         for (final Plot plot : PlotSquared.getPlots(world).values()) {
             final HashMap<String, Flag> flags = plot.settings.flags;
             Iterator<Entry<String, Flag>> i = flags.entrySet().iterator();
@@ -72,7 +72,7 @@ public class DebugFixFlags extends SubCommand {
                 DBFunc.setFlags(plot.world, plot, plot.settings.flags.values());
             }
         }
-        MainUtil.sendMessage(plr, "&a已完成!");
+        MainUtil.sendMessage(plr, "&aDone!");
         return true;
     }
 }

@@ -37,7 +37,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class SetOwner extends SubCommand {
     public SetOwner() {
-        super("setowner", "plots.set.owner", "设置地皮拥有者", "setowner <player>", "so", CommandCategory.ACTIONS, true);
+        super("setowner", "plots.set.owner", "Set the plot owner", "setowner <player>", "so", CommandCategory.ACTIONS, true);
     }
 
     /*

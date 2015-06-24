@@ -34,7 +34,7 @@ import com.intellectualcrafters.plot.object.PlotPlayer;
 
 public class Inventory extends SubCommand {
     public Inventory() {
-        super("inventory", "plots.inventory", "打开指令菜单", "inventory", "inv", CommandCategory.INFO, true);
+        super("inventory", "plots.inventory", "Open a command inventory", "inventory", "inv", CommandCategory.INFO, true);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Inventory extends SubCommand {
             }
         }
         final int size = 9 * (int) Math.ceil(cmds.size() / 9.0);
-        final org.bukkit.inventory.Inventory inventory = Bukkit.createInventory(null, size, "PlotSquared 指令菜单");
+        final org.bukkit.inventory.Inventory inventory = Bukkit.createInventory(null, size, "PlotSquared Commands");
         for (final SubCommand cmd : cmds) {
             inventory.addItem(getItem(cmd));
         }

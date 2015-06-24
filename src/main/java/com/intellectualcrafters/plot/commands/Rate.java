@@ -38,7 +38,7 @@ public class Rate extends SubCommand {
      * alias, CommandCategory category
      */
     public Rate() {
-        super("rate", "plots.rate", "为一个地皮评分", "rate {0-10}", "rt", CommandCategory.ACTIONS, true);
+        super("rate", "plots.rate", "Rate the plot", "rate {0-10}", "rt", CommandCategory.ACTIONS, true);
     }
 
     @Override

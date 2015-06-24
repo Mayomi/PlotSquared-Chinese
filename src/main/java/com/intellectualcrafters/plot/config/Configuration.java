@@ -107,7 +107,10 @@ public class Configuration {
         public boolean validateValue(final String string) {
             try {
                 final int biome = BlockManager.manager.getBiomeFromString(string.toUpperCase());
-                return biome != -1;
+                if (biome == -1) {
+                    return false;
+                }
+                return true;
             } catch (final Exception e) {
                 return false;
             }

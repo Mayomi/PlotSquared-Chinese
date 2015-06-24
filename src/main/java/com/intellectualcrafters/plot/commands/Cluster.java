@@ -45,7 +45,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class Cluster extends SubCommand {
     public Cluster() {
-        super(Command.CLUSTER, "管理一个地皮组群", "cluster", CommandCategory.ACTIONS, true);
+        super(Command.CLUSTER, "Manage a plot cluster", "cluster", CommandCategory.ACTIONS, true);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class Cluster extends SubCommand {
                 }
                 if (args.length != 4) {
                     final PlotId id = ClusterManager.estimatePlotId(plr.getLocation());
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster create <组群名称> <id-bot> <id-top>");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster create <name> <id-bot> <id-top>");
                     MainUtil.sendMessage(plr, C.CLUSTER_CURRENT_PLOTID, "" + id);
                     return false;
                 }
@@ -257,7 +257,7 @@ public class Cluster extends SubCommand {
                     return false;
                 }
                 if ((args.length != 1) && (args.length != 2)) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster regen [组群名称]");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster regen [name]");
                     return false;
                 }
                 PlotCluster cluster;
@@ -292,7 +292,7 @@ public class Cluster extends SubCommand {
                     return false;
                 }
                 if (args.length != 2) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster invite <玩家名称>");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster invite <player>");
                     return false;
                 }
                 // check if in cluster
@@ -334,7 +334,7 @@ public class Cluster extends SubCommand {
                     return false;
                 }
                 if (args.length != 2) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster kick <玩家名称>");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster kick <player>");
                     return false;
                 }
                 final PlotCluster cluster = ClusterManager.getCluster(plr.getLocation());
@@ -386,7 +386,7 @@ public class Cluster extends SubCommand {
                     return false;
                 }
                 if ((args.length != 1) && (args.length != 2)) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster leave [组群名称]");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster leave [name]");
                     return false;
                 }
                 PlotCluster cluster;
@@ -436,7 +436,7 @@ public class Cluster extends SubCommand {
                     return false;
                 }
                 if (args.length != 3) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster helpers <add|remove> <玩家名称>");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster helpers <add|remove> <player>");
                     return false;
                 }
                 final PlotCluster cluster = ClusterManager.getCluster(plr.getLocation());
@@ -459,7 +459,7 @@ public class Cluster extends SubCommand {
                     DBFunc.removeHelper(cluster, uuid);
                     return MainUtil.sendMessage(plr, C.CLUSTER_REMOVED_HELPER);
                 }
-                MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster helpers <add|remove> <玩家名称>");
+                MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster helpers <add|remove> <player>");
                 return false;
             }
             case "spawn":
@@ -470,7 +470,7 @@ public class Cluster extends SubCommand {
                     return false;
                 }
                 if (args.length != 2) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster tp <组群名称>");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster tp <name>");
                     return false;
                 }
                 final PlotCluster cluster = ClusterManager.getCluster(plr.getLocation().getWorld(), args[1]);
@@ -497,7 +497,7 @@ public class Cluster extends SubCommand {
                     return false;
                 }
                 if ((args.length != 1) && (args.length != 2)) {
-                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster info [组群名称]");
+                    MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot cluster info [name]");
                     return false;
                 }
                 PlotCluster cluster;

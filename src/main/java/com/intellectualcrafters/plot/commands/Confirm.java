@@ -32,7 +32,7 @@ import com.intellectualcrafters.plot.util.TaskManager;
  */
 public class Confirm extends SubCommand {
     public Confirm() {
-        super("confirm", "plots.use", "是否继续下一步", "confirm", "confirm", CommandCategory.ACTIONS, false);
+        super("confirm", "plots.use", "Confirm an action", "confirm", "confirm", CommandCategory.ACTIONS, false);
     }
 
     @Override

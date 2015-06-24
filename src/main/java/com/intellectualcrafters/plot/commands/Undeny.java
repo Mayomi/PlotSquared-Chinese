@@ -34,13 +34,13 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class Undeny extends SubCommand {
     public Undeny() {
-        super(Command.UNDENY, "解除一个黑名单玩家", "undeny <玩家名称>", CommandCategory.ACTIONS, true);
+        super(Command.UNDENY, "Remove a denied user from a plot", "undeny <player>", CommandCategory.ACTIONS, true);
     }
 
     @Override
     public boolean execute(final PlotPlayer plr, final String... args) {
         if (args.length != 1) {
-            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot undeny <玩家名称>");
+            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot undeny <player>");
             return true;
         }
         final Location loc = plr.getLocation();

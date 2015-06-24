@@ -35,13 +35,13 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class Trust extends SubCommand {
     public Trust() {
-        super(Command.TRUST, "为地皮添加可信玩家", "trust <玩家名称>", CommandCategory.ACTIONS, true);
+        super(Command.TRUST, "Allow a player to build in a plot", "trust <player>", CommandCategory.ACTIONS, true);
     }
 
     @Override
     public boolean execute(final PlotPlayer plr, final String... args) {
         if (args.length != 1) {
-            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot trust <玩家名称>");
+            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot trust <player>");
             return true;
         }
         final Location loc = plr.getLocation();

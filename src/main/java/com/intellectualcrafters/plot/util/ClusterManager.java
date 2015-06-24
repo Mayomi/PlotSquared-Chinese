@@ -32,7 +32,10 @@ public class ClusterManager {
     public static PlotCluster last;
 
     public static boolean contains(final PlotCluster cluster, final PlotId id) {
-        return (cluster.getP1().x <= id.x) && (cluster.getP1().y <= id.y) && (cluster.getP2().x >= id.x) && (cluster.getP2().y >= id.y);
+        if ((cluster.getP1().x <= id.x) && (cluster.getP1().y <= id.y) && (cluster.getP2().x >= id.x) && (cluster.getP2().y >= id.y)) {
+            return true;
+        }
+        return false;
     }
 
     public static HashSet<PlotCluster> getClusters(final World world) {
@@ -107,7 +110,10 @@ public class ClusterManager {
         final PlotWorld plotworld = PlotSquared.getPlotWorld(world);
         final Location bot = manager.getPlotBottomLocAbs(plotworld, cluster.getP1());
         final Location top = manager.getPlotTopLocAbs(plotworld, cluster.getP2()).add(1, 0, 1);
-        return (bot.getX() < loc.getX()) && (bot.getZ() < loc.getZ()) && (top.getX() > loc.getX()) && (top.getZ() > loc.getZ());
+        if ((bot.getX() < loc.getX()) && (bot.getZ() < loc.getZ()) && (top.getX() > loc.getX()) && (top.getZ() > loc.getZ())) {
+            return true;
+        }
+        return false;
     }
 
     public static HashSet<PlotCluster> getIntersects(final String world, final PlotClusterId id) {
@@ -126,7 +132,10 @@ public class ClusterManager {
     public static boolean intersects(final PlotCluster cluster, final PlotClusterId id) {
         final PlotId pos1 = cluster.getP1();
         final PlotId pos2 = cluster.getP2();
-        return (pos1.x <= id.pos2.x) && (pos2.x >= id.pos1.x) && (pos1.y <= id.pos2.y) && (pos2.y >= id.pos1.y);
+        if ((pos1.x <= id.pos2.x) && (pos2.x >= id.pos1.x) && (pos1.y <= id.pos2.y) && (pos2.y >= id.pos1.y)) {
+            return true;
+        }
+        return false;
     }
 
     public static PlotCluster getCluster(final Plot plot) {

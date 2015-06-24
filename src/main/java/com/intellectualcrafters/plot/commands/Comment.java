@@ -36,7 +36,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class Comment extends SubCommand {
     public Comment() {
-        super(Command.COMMENT, "给一块地皮留言", "comment", CommandCategory.ACTIONS, true);
+        super(Command.COMMENT, "Comment on a plot", "comment", CommandCategory.ACTIONS, true);
     }
 
     @Override

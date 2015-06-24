@@ -32,7 +32,7 @@ import com.intellectualcrafters.plot.util.TaskManager;
 
 public class DebugFill extends SubCommand {
     public DebugFill() {
-        super("fill", "plots.fill", "填充基岩", "fill", "debugfill", CommandCategory.DEBUG, true);
+        super("fill", "plots.fill", "Fill or surround a plot in bedrock", "fill", "debugfill", CommandCategory.DEBUG, true);
     }
 
     @Override
@@ -56,14 +56,14 @@ public class DebugFill extends SubCommand {
         }
         final Location bottom = MainUtil.getPlotBottomLoc(plot.world, plot.id).add(1, 0, 1);
         final Location top = MainUtil.getPlotTopLoc(plot.world, plot.id);
-        MainUtil.sendMessage(player, "&c准备开始进程");
+        MainUtil.sendMessage(player, "&cPreparing task");
         SetBlockQueue.addNotify(new Runnable() {
             @Override
             public void run() {
                 TaskManager.runTaskAsync(new Runnable() {
                     @Override
                     public void run() {
-                        MainUtil.sendMessage(player, "&7 - 已开始");
+                        MainUtil.sendMessage(player, "&7 - Starting");
                         if (args[0].equalsIgnoreCase("all")) {
                             for (int x = bottom.getX(); x <= top.getX(); x++) {
                                 for (int y = 0; y <= 255; y++) {
@@ -75,7 +75,7 @@ public class DebugFill extends SubCommand {
                             SetBlockQueue.addNotify(new Runnable() {
                                 @Override
                                 public void run() {
-                                    MainUtil.sendMessage(player, "&a填充完毕!");
+                                    MainUtil.sendMessage(player, "&aFill task complete!");
                                 }
                             });
                         }
@@ -108,7 +108,7 @@ public class DebugFill extends SubCommand {
                             SetBlockQueue.addNotify(new Runnable() {
                                 @Override
                                 public void run() {
-                                    MainUtil.sendMessage(player, "&a墙体填充已完成! 但是顶层填充需要时间 :(");
+                                    MainUtil.sendMessage(player, "&aWalls complete! The ceiling will take a while :(");
                                     bottom.setY(255);
                                     top.add(1,0,1);
                                     SetBlockQueue.setSlow(true);
@@ -116,7 +116,7 @@ public class DebugFill extends SubCommand {
                                     SetBlockQueue.addNotify(new Runnable() {
                                         @Override
                                         public void run() {
-                                            MainUtil.sendMessage(player, "&a填充进程已完成!");
+                                            MainUtil.sendMessage(player, "&aFill task complete!");
                                             SetBlockQueue.setSlow(false);
                                         }
                                     });

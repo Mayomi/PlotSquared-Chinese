@@ -36,7 +36,7 @@ import com.intellectualcrafters.plot.util.Permissions;
 
 public class Auto extends SubCommand {
     public Auto() {
-        super("auto", "plots.auto", "随机领取一块地皮", "auto", "a", CommandCategory.CLAIMING, true);
+        super("auto", "plots.auto", "Claim the nearest plot", "auto", "a", CommandCategory.CLAIMING, true);
     }
 
     public static PlotId getNextPlot(final PlotId id, final int step) {
@@ -91,10 +91,10 @@ public class Auto extends SubCommand {
                     size_x = Integer.parseInt(split[0]);
                     size_z = Integer.parseInt(split[1]);
                     if ((size_x < 1) || (size_z < 1)) {
-                        MainUtil.sendMessage(plr, "&c错误: 大小<=0");
+                        MainUtil.sendMessage(plr, "&cError: size<=0");
                     }
                     if ((size_x > 4) || (size_z > 4)) {
-                        MainUtil.sendMessage(plr, "&c错误: 大小>4");
+                        MainUtil.sendMessage(plr, "&cError: size>4");
                     }
                     if (args.length > 1) {
                         schematic = args[1];
@@ -143,7 +143,7 @@ public class Auto extends SubCommand {
         if (!schematic.equals("")) {
             // if (pWorld.SCHEMATIC_CLAIM_SPECIFY) {
             if (!pWorld.SCHEMATICS.contains(schematic.toLowerCase())) {
-                sendMessage(plr, C.SCHEMATIC_INVALID, "不存在: " + schematic);
+                sendMessage(plr, C.SCHEMATIC_INVALID, "non-existent: " + schematic);
                 return true;
             }
             if (!Permissions.hasPermission(plr, "plots.claim." + schematic) && !plr.hasPermission("plots.admin.command.schematic")) {

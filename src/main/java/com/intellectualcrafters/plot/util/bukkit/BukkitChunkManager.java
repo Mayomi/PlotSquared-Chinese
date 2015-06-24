@@ -281,7 +281,7 @@ public class BukkitChunkManager extends ChunkManager {
                                                 return;
                                             }
                                         }
-                                    }
+                                    };
                                 }, 1, 1);
                                 TaskManager.tasks.put(currentIndex, task);
                             }
@@ -384,7 +384,7 @@ public class BukkitChunkManager extends ChunkManager {
                             restoreEntities(world, 0, 0);
                         }
                         MainUtil.update(world.getName(), loc);
-                        BukkitSetBlockManager.setBlockManager.update(Arrays.asList(chunk));
+                        BukkitSetBlockManager.setBlockManager.update(Arrays.asList(new Chunk[] { chunk }));
                     }
                     CURRENT_PLOT_CLEAR = null;
                 }
@@ -1117,7 +1117,7 @@ public class BukkitChunkManager extends ChunkManager {
             restoreEntities(world, 0, 0);
         }
         MainUtil.update(world.getName(), chunkLoc);
-        BukkitSetBlockManager.setBlockManager.update(Arrays.asList(chunk));
+        BukkitSetBlockManager.setBlockManager.update(Arrays.asList(new Chunk[] { chunk }));
         CURRENT_PLOT_CLEAR = null;
     }
 

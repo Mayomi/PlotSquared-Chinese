@@ -56,7 +56,7 @@ public class Set extends SubCommand {
     public final static String[] aliases = new String[] { "b", "w", "wf", "f", "a", "h", "fl" };
 
     public Set() {
-        super(Command.SET, "设置地皮参数", "set {arg} {value...}", CommandCategory.ACTIONS, true);
+        super(Command.SET, "Set a plot value", "set {arg} {value...}", CommandCategory.ACTIONS, true);
     }
 
     @Override
@@ -198,7 +198,7 @@ public class Set extends SubCommand {
                 return true;
             }
             if (args[1].length() < 2) {
-                sendMessage(plr, C.NAME_LITTLE, "生物群落", args[1].length() + "", "2");
+                sendMessage(plr, C.NAME_LITTLE, "Biome", args[1].length() + "", "2");
                 return true;
             }
             final int biome = BlockManager.manager.getBiomeFromString(args[1]);

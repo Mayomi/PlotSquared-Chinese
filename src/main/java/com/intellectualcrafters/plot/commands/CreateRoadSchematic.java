@@ -31,7 +31,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class CreateRoadSchematic extends SubCommand {
     public CreateRoadSchematic() {
-        super(Command.CREATEROADSCHEMATIC, "当前地皮所使用的道路保存为建筑文件", "crs", CommandCategory.DEBUG, true);
+        super(Command.CREATEROADSCHEMATIC, "Add a road schematic to your world using the road around your current plot", "crs", CommandCategory.DEBUG, true);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CreateRoadSchematic extends SubCommand {
             return sendMessage(player, C.NOT_IN_PLOT_WORLD);
         }
         HybridUtils.manager.setupRoadSchematic(plot);
-        MainUtil.sendMessage(player, "&6保存道路的建筑文件");
+        MainUtil.sendMessage(player, "&6Saved new road schematic");
         return true;
     }
 }

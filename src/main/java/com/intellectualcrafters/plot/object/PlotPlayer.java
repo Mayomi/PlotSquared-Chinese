@@ -9,27 +9,27 @@ import java.util.UUID;
  */
 public interface PlotPlayer {
     
-    long getPreviousLogin();
+    public long getPreviousLogin();
     
-    Location getLocation();
+    public Location getLocation();
     
-    Location getLocationFull();
+    public Location getLocationFull();
     
-    UUID getUUID();
+    public UUID getUUID();
     
-    boolean hasPermission(final String perm);
+    public boolean hasPermission(final String perm);
     
-    void sendMessage(final String message);
+    public void sendMessage(final String message);
 
-    void teleport(final Location loc);
+    public void teleport(final Location loc);
 
-    boolean isOp();
+    public boolean isOp();
 
-    boolean isOnline();
+    public boolean isOnline();
 
-    String getName();
+    public String getName();
     
-    void setCompassTarget(Location loc);
+    public void setCompassTarget(Location loc);
     
     public void loadData();
     
@@ -42,21 +42,21 @@ public interface PlotPlayer {
      * @param key
      * @param value
      */
-    void setAttribute(String key);
+    public void setAttribute(String key);
     
     /**
      * The attribute will be either true or false
      * @param key
      */
-    boolean getAttribute(String key);
+    public boolean getAttribute(String key);
     
     /**
      * Remove an attribute from a player
      * @param key
      */
-    void removeAttribute(String key);
+    public void removeAttribute(String key);
     
-    void setMeta(String key, Object value);
-    Object getMeta(String key);
-    void deleteMeta(String key);
+    public void setMeta(String key, Object value);
+    public Object getMeta(String key);
+    public void deleteMeta(String key);
 }

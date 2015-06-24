@@ -41,24 +41,24 @@ import com.intellectualcrafters.plot.util.SetupUtils;
 
 public class Setup extends SubCommand {
     public Setup() {
-        super("setup", "plots.admin.command.setup", "地皮世界安装指令", "setup", "create", CommandCategory.ACTIONS, false);
+        super("setup", "plots.admin.command.setup", "Plotworld setup command", "setup", "create", CommandCategory.ACTIONS, false);
     }
     
     public void displayGenerators(PlotPlayer plr) {
         StringBuffer message = new StringBuffer();
-        message.append("&6你想要生成什么类型地皮?");
+        message.append("&6What generator do you want?");
         for (Entry<String, ChunkGenerator> entry : SetupUtils.generators.entrySet()) {
             if (entry.getKey().equals("PlotSquared")) {
-                message.append("\n&8 - &2" + entry.getKey() + " (默认生成参数)");
+                message.append("\n&8 - &2" + entry.getKey() + " (Default Generator)");
             }
             else if (entry.getValue() instanceof HybridGen) {
-                message.append("\n&8 - &7" + entry.getKey() + " (混合生成参数)");
+                message.append("\n&8 - &7" + entry.getKey() + " (Hybrid Generator)");
             }
             else if (entry.getValue() instanceof PlotGenerator) {
-                message.append("\n&8 - &7" + entry.getKey() + " (高级地皮生成参数)");
+                message.append("\n&8 - &7" + entry.getKey() + " (Plot Generator)");
             }
             else {
-                message.append("\n&8 - &7" + entry.getKey() + " (其他生成参数)");
+                message.append("\n&8 - &7" + entry.getKey() + " (Unknown structure)");
             }
         }
         MainUtil.sendMessage(plr, message.toString());
@@ -85,7 +85,7 @@ public class Setup extends SubCommand {
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("cancel")) {
                 SetupUtils.setupMap.remove(name);
-                MainUtil.sendMessage(plr, "&a取消了地皮安装");
+                MainUtil.sendMessage(plr, "&aCancelled setup");
                 return false;
             }
             if (args[0].equalsIgnoreCase("back")) {
@@ -106,19 +106,19 @@ public class Setup extends SubCommand {
             case 0: { // choose generator
                 if ((args.length != 1) || !SetupUtils.generators.containsKey(args[0])) {
                     final String prefix = "\n&8 - &7";
-                    MainUtil.sendMessage(plr, "&c你必须选择一个生成参数!" + prefix + StringUtils.join(SetupUtils.generators.keySet(), prefix).replaceAll("PlotSquared", "&2PlotSquared 默认"));
+                    MainUtil.sendMessage(plr, "&cYou must choose a generator!" + prefix + StringUtils.join(SetupUtils.generators.keySet(), prefix).replaceAll("PlotSquared", "&2PlotSquared"));
                     sendMessage(plr, C.SETUP_INIT);
                     return false;
                 }
                 object.setupGenerator = args[0];
                 object.current++;
                 final String partial = Settings.ENABLE_CLUSTERS ? "\n&8 - &7PARTIAL&8 - &7Vanilla with clusters of plots" : "";
-                MainUtil.sendMessage(plr, "&6你想要生成什么类型地皮?" + "\n&8 - &2DEFAULT&8 - &7标准地皮世界生成" + "\n&8 - &7AUGMENTED&8 - &7地形地皮世界生成" + partial);
+                MainUtil.sendMessage(plr, "&6What world type do you want?" + "\n&8 - &2DEFAULT&8 - &7Standard plot generation" + "\n&8 - &7AUGMENTED&8 - &7Plot generation with terrain" + partial);
                 break;
             }
             case 1: { // choose world type
-                List<String> allTypes = Arrays.asList("default", "augmented", "partial");
-                List<String> allDesc = Arrays.asList("Standard plot generation", "Plot generation with vanilla terrain", "Vanilla with clusters of plots");
+                List<String> allTypes = Arrays.asList(new String[] { "default", "augmented", "partial"});
+                List<String> allDesc = Arrays.asList(new String[] { "Standard plot generation", "Plot generation with vanilla terrain", "Vanilla with clusters of plots"});
                 ArrayList<String> types = new ArrayList<>();
                 if (SetupUtils.generators.get(object.setupGenerator) instanceof PlotGenerator) {
                     types.add("default");
@@ -128,7 +128,7 @@ public class Setup extends SubCommand {
                     types.add("partial");
                 }
                 if ((args.length != 1) || !types.contains(args[0].toLowerCase())) {
-                    MainUtil.sendMessage(plr, "&c你必须选择一个世界类型!");
+                    MainUtil.sendMessage(plr, "&cYou must choose a world type!");
                     for (String type : types) {
                         int i = allTypes.indexOf(type);
                         if (type.equals("default")) {
@@ -151,7 +151,7 @@ public class Setup extends SubCommand {
                     }
                     if (object.step.length == 0) {
                         object.current = 4;
-                        MainUtil.sendMessage(plr, "&6设置生成的地皮世界名称");
+                        MainUtil.sendMessage(plr, "&6What do you want your world to be called?");
                         object.setup_index = 0;
                         return true;
                     }
@@ -166,19 +166,19 @@ public class Setup extends SubCommand {
                     }
                     else {
                         object.plotManager = "PlotSquared";
-                        MainUtil.sendMessage(plr, "&c[警告] 指定的生成参数不能被识别");
-                        MainUtil.sendMessage(plr, "&7 - 你需要配置一下其他插件");
+                        MainUtil.sendMessage(plr, "&c[WARNING] The specified generator does not identify as PlotGenerator");
+                        MainUtil.sendMessage(plr, "&7 - You may need to manually configure the other plugin");
                         object.step = ((PlotGenerator) SetupUtils.generators.get(object.plotManager)).getNewPlotWorld(null).getSettingNodes();
                     }
-                    MainUtil.sendMessage(plr, "&6你想生成什么地形?" + "\n&8 - &2NONE&8 - &7不设置地形" + "\n&8 - &7ORE&8 - &7一些矿脉以及树木" + "\n&8 - &7ROAD&8 - &7被道路分割的地形" + "\n&8 - &7ALL&8 - &7以上的综合地形");
+                    MainUtil.sendMessage(plr, "&6What terrain would you like in plots?" + "\n&8 - &2NONE&8 - &7No terrain at all" + "\n&8 - &7ORE&8 - &7Just some ore veins and trees" + "\n&8 - &7ROAD&8 - &7Terrain seperated by roads" + "\n&8 - &7ALL&8 - &7Entirely vanilla generation");
                 }
                 object.current++;
                 break;
             }
             case 2: { // Choose terrain
-                final List<String> terrain = Arrays.asList("none", "ore", "road", "all");
+                final List<String> terrain = Arrays.asList(new String[] { "none", "ore", "road", "all" });
                 if ((args.length != 1) || !terrain.contains(args[0].toLowerCase())) {
-                    MainUtil.sendMessage(plr, "&c你必须选择一个地形!" + "\n&8 - &2NONE&8 - &7不设置地形" + "\n&8 - &7ORE&8 - &7一些矿脉以及树木" + "\n&8 - &7ROAD&8 - &7被道路分割的地形" + "\n&8 - &7ALL&8 - &7以上的综合地形");
+                    MainUtil.sendMessage(plr, "&cYou must choose the terrain!" + "\n&8 - &2NONE&8 - &7No terrain at all" + "\n&8 - &7ORE&8 - &7Just some ore veins and trees" + "\n&8 - &7ROAD&8 - &7Terrain seperated by roads" + "\n&8 - &7ALL&8 - &7Entirely vanilla generation");
                     return false;
                 }
                 object.terrain = terrain.indexOf(args[0].toLowerCase());
@@ -192,7 +192,7 @@ public class Setup extends SubCommand {
             }
             case 3: { // world setup
                 if (object.setup_index == object.step.length) {
-                    MainUtil.sendMessage(plr, "&6设置生成的地皮世界名称");
+                    MainUtil.sendMessage(plr, "&6What do you want your world to be called?");
                     object.setup_index = 0;
                     object.current++;
                     return true;
@@ -222,11 +222,11 @@ public class Setup extends SubCommand {
             }
             case 4: {
                 if (args.length != 1) {
-                    MainUtil.sendMessage(plr, "&c你必须设置一个世界名称!");
+                    MainUtil.sendMessage(plr, "&cYou need to choose a world name!");
                     return false;
                 }
                 if (BlockManager.manager.isWorld(args[0])) {
-                    MainUtil.sendMessage(plr, "&c这个世界名称已存在!");
+                    MainUtil.sendMessage(plr, "&cThat world name is already taken!");
                 }
                 object.world = args[0];
                 SetupUtils.setupMap.remove(name);
@@ -242,7 +242,7 @@ public class Setup extends SubCommand {
                         plr.teleport(BlockManager.manager.getSpawn(world));
                     }
                 } catch (final Exception e) {
-                    plr.sendMessage("&c发生了错误. 请查看控制台");
+                    plr.sendMessage("&cAn error occured. See console for more information");
                     e.printStackTrace();
                 }
                 sendMessage(plr, C.SETUP_FINISHED, object.world);

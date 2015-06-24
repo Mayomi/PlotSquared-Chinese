@@ -35,13 +35,13 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
 
 public class Add extends SubCommand {
     public Add() {
-        super(Command.ADD, "允许你在线时, 该玩家可以在你的地皮建造", "add <玩家名称>", CommandCategory.ACTIONS, true);
+        super(Command.ADD, "Allow a user to build while you are online", "add <player>", CommandCategory.ACTIONS, true);
     }
 
     @Override
     public boolean execute(final PlotPlayer plr, final String... args) {
         if (args.length != 1) {
-            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot add <玩家名称>");
+            MainUtil.sendMessage(plr, C.COMMAND_SYNTAX, "/plot add <player>");
             return true;
         }
         final Location loc = plr.getLocation();

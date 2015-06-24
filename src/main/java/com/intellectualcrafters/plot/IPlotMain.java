@@ -19,59 +19,61 @@ import com.intellectualcrafters.plot.util.TaskManager;
 import com.intellectualcrafters.plot.uuid.UUIDWrapper;
 
 public interface IPlotMain {
-    void log(String message);
+    public void log(String message);
 
-    File getDirectory();
+    public File getDirectory();
 
-    void disable();
+    public void disable();
 
-    String getVersion();
+    public String getVersion();
 
-    void handleKick(UUID uuid, C c);
+    public void handleKick(UUID uuid, C c);
 
-    TaskManager getTaskManager();
+    public TaskManager getTaskManager();
 
-    void runEntityTask();
+    public void runEntityTask();
 
-    void registerCommands();
+    public void registerCommands();
 
-    void registerPlayerEvents();
+    public void registerPlayerEvents();
 
-    void registerInventoryEvents();
+    public void registerInventoryEvents();
 
-    void registerPlotPlusEvents();
+    public void registerPlotPlusEvents();
 
-    void registerForceFieldEvents();
+    public void registerForceFieldEvents();
 
-    void registerWorldEditEvents();
+    public void registerWorldEditEvents();
     
-    void registerTNTListener();
+    public void registerTNTListener();
 
-    EconHandler getEconomyHandler();
+    public EconHandler getEconomyHandler();
 
-    BlockManager initBlockManager();
+    public BlockManager initBlockManager();
     
-    EventUtil initEventUtil();
+    public EventUtil initEventUtil();
 
-    ChunkManager initChunkManager();
+    public ChunkManager initChunkManager();
 
-    SetupUtils initSetupUtils();
+    public SetupUtils initSetupUtils();
 
-    HybridUtils initHybridUtils();
+    public HybridUtils initHybridUtils();
 
-    UUIDWrapper initUUIDHandler();
+    public UUIDWrapper initUUIDHandler();
 
-    boolean initPlotMeConverter();
+    public boolean initPlotMeConverter();
     
-    void unregister(PlotPlayer player);
+    public void unregister(PlotPlayer player);
 
-    ChunkGenerator getGenerator(String world, String name);
+    public ChunkGenerator getGenerator(String world, String name);
 
-    APlotListener initPlotListener();
+    public APlotListener initPlotListener();
 
-    void registerChunkProcessor();
+    public void registerChunkProcessor();
 
-    void registerWorldEvents();
+    public void registerWorldEvents();
 
-    PlayerManager initPlayerManager();
+    public PlayerManager initPlayerManager();
+
+    public boolean checkVersion(int major, int minor, int minor2);
 }

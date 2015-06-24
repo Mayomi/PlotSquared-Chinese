@@ -11,7 +11,7 @@ import com.intellectualcrafters.plot.object.PlotPlayer;
 
 public class Help extends SubCommand {
     public Help() {
-        super("help", "", "获取帮助菜单", "help", "he", SubCommand.CommandCategory.INFO, false);
+        super("help", "", "Get this help menu", "help", "he", SubCommand.CommandCategory.INFO, false);
     }
 
     @Override

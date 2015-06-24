@@ -29,13 +29,13 @@ import com.intellectualcrafters.plot.util.Permissions;
 
 public class WE_Anywhere extends SubCommand {
     public WE_Anywhere() {
-        super("weanywhere", "plots.worldedit.bypass", "强制绕过WE限制", "weanywhere", "wea", CommandCategory.DEBUG, true);
+        super("weanywhere", "plots.worldedit.bypass", "Force bypass of WorldEdit", "weanywhere", "wea", CommandCategory.DEBUG, true);
     }
 
     @Override
     public boolean execute(final PlotPlayer plr, final String... args) {
         if (PlotSquared.worldEdit == null) {
-            MainUtil.sendMessage(plr, "&c这个服务器没有装 WorldEdit");
+            MainUtil.sendMessage(plr, "&cWorldEdit is not enabled on this server");
             return false;
         }
         if (Permissions.hasPermission(plr, "plots.worldedit.bypass")) {

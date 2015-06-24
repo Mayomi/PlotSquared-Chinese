@@ -45,7 +45,7 @@ public class Trim extends SubCommand {
     private static int TASK_ID = 0;
 
     public Trim() {
-        super("trim", "plots.admin", "删除地皮位置中未建筑的地皮", "trim", "", CommandCategory.DEBUG, false);
+        super("trim", "plots.admin", "Delete unmodified portions of your plotworld", "trim", "", CommandCategory.DEBUG, false);
     }
 
     public PlotId getId(final String id) {
@@ -67,11 +67,11 @@ public class Trim extends SubCommand {
             final String arg = args[0].toLowerCase();
             final PlotId id = getId(arg);
             if (id != null) {
-                MainUtil.sendMessage(plr, "/plot trim x;z &l<世界名称>");
+                MainUtil.sendMessage(plr, "/plot trim x;z &l<world>");
                 return false;
             }
             if (arg.equals("all")) {
-                MainUtil.sendMessage(plr, "/plot trim all &l<世界名称>");
+                MainUtil.sendMessage(plr, "/plot trim all &l<world>");
                 return false;
             }
             MainUtil.sendMessage(plr, C.TRIM_SYNTAX);
@@ -169,9 +169,9 @@ public class Trim extends SubCommand {
         final ArrayList<Plot> plots = new ArrayList<>();
         plots.addAll(PlotSquared.getPlots(world).values());
         final HashSet<ChunkLoc> chunks = new HashSet<>(ChunkManager.manager.getChunkChunks(world));
-        sendMessage(" - 地图文件 #: " + chunks.size());
-        sendMessage(" - 区块数目: " + (chunks.size() * 1024) + " (max)");
-        sendMessage(" - 估计时间: " + (chunks.size() / 1200) + " 分钟");
+        sendMessage(" - MCA #: " + chunks.size());
+        sendMessage(" - CHUNKS: " + (chunks.size() * 1024) + " (max)");
+        sendMessage(" - TIME ESTIMATE: " + (chunks.size() / 1200) + " minutes");
         Trim.TASK_ID = TaskManager.runTaskRepeat(new Runnable() {
             @Override
             public void run() {
@@ -208,6 +208,6 @@ public class Trim extends SubCommand {
     }
 
     public static void sendMessage(final String message) {
-        PlotSquared.log("&3PlotSquared -> 世界清理&8: &7" + message);
+        PlotSquared.log("&3PlotSquared -> World trim&8: &7" + message);
     }
 }

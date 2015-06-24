@@ -36,7 +36,7 @@ import com.intellectualcrafters.plot.util.MainUtil;
 
 public class Inbox extends SubCommand {
     public Inbox() {
-        super(Command.INBOX, "给一个地皮留言", "inbox [页数] [delete <页数>|clear|page]", CommandCategory.ACTIONS, true);
+        super(Command.INBOX, "Review the comments for a plot", "inbox [inbox] [delete <index>|clear|page]", CommandCategory.ACTIONS, true);
     }
     
     public void displayComments(PlotPlayer player, List<PlotComment> oldComments, int page) {
@@ -81,7 +81,7 @@ public class Inbox extends SubCommand {
     public boolean execute(final PlotPlayer player, final String... args) {
         final Plot plot = MainUtil.getPlot(player.getLocation());
         if (args.length == 0) {
-            sendMessage(player, C.COMMAND_SYNTAX, "/plot inbox [页数] [delete <页数>|clear|page]");
+            sendMessage(player, C.COMMAND_SYNTAX, "/plot inbox [inbox] [delete <index>|clear|page]");
             for (final CommentInbox inbox : CommentManager.inboxes.values()) {
                 if (inbox.canRead(plot, player)) {
                     if (!inbox.getComments(plot, new RunnableVal() {
@@ -131,7 +131,7 @@ public class Inbox extends SubCommand {
                         sendMessage(player, C.NO_PERM_INBOX_MODIFY);
                     }
                     if (args.length != 3) {
-                        sendMessage(player, C.COMMAND_SYNTAX, "/plot inbox " + inbox.toString() + " delete <页数>");
+                        sendMessage(player, C.COMMAND_SYNTAX, "/plot inbox " + inbox.toString() + " delete <index>");
                     }
                     final int index;
                     try {
@@ -142,7 +142,7 @@ public class Inbox extends SubCommand {
                         }
                     }
                     catch (NumberFormatException e) {
-                        sendMessage(player, C.COMMAND_SYNTAX, "/plot inbox " + inbox.toString() + " delete <页数>");
+                        sendMessage(player, C.COMMAND_SYNTAX, "/plot inbox " + inbox.toString() + " delete <index>");
                         return false;
                     }
                     
@@ -181,9 +181,9 @@ public class Inbox extends SubCommand {
                         page = Integer.parseInt(args[1]) ;
                     }
                     catch (NumberFormatException e) {
-                        sendMessage(player, C.COMMAND_SYNTAX, "/plot inbox [页数] [delete <页数>|clear|page]");
+                        sendMessage(player, C.COMMAND_SYNTAX, "/plot inbox [inbox] [delete <index>|clear|page]");
                         return false;
-                    }
+                    };
                 }
             }
         }

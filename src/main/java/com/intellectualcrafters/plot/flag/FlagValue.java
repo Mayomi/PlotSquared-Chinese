@@ -286,9 +286,9 @@ public abstract class FlagValue<T> {
     }
 
     public interface ListValue {
-        void add(Object t, String value);
+        public void add(Object t, String value);
 
-        void remove(Object t, String value);
+        public void remove(Object t, String value);
     }
 
     public static class PlotBlockListValue extends FlagValue<HashSet<PlotBlock>> implements ListValue {

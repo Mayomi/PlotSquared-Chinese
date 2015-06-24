@@ -46,7 +46,7 @@ import com.intellectualcrafters.plot.util.bukkit.UUIDHandler;
  */
 public class DebugClaimTest extends SubCommand {
     public DebugClaimTest() {
-        super(Command.DEBUGCLAIMTEST, "如果你不小心删除了数据库, 这个指令将可以识别地皮牌子来恢复数据库. 执行时间可能会漫长.", "debugclaimtest", CommandCategory.DEBUG, false);
+        super(Command.DEBUGCLAIMTEST, "If you accidentally delete your database, this command will attempt to restore all plots based on the data from the plot signs. Execution time may vary", "debugclaimtest", CommandCategory.DEBUG, false);
     }
 
     public static boolean claimPlot(final PlotPlayer player, final Plot plot, final boolean teleport) {
@@ -70,11 +70,11 @@ public class DebugClaimTest extends SubCommand {
     public boolean execute(final PlotPlayer plr, final String... args) {
         if (plr == null) {
             if (args.length < 3) {
-                return !MainUtil.sendMessage(null, "如果你删除了你的数据库, 这个指令将可以识别地皮牌子来恢复数据库. \n\n&c缺失地皮世界参数 /plot debugclaimtest {世界名称} {最小地皮ID} {最大地皮ID}");
+                return !MainUtil.sendMessage(null, "If you accidentally delete your database, this command will attempt to restore all plots based on the data from the plot signs. \n\n&cMissing world arg /plot debugclaimtest {world} {PlotId min} {PlotId max}");
             }
             final String world = args[0];
             if (!BlockManager.manager.isWorld(world) || !PlotSquared.isPlotWorld(world)) {
-                return !MainUtil.sendMessage(null, "&c无效的地皮世界!");
+                return !MainUtil.sendMessage(null, "&cInvalid plot world!");
             }
             PlotId min, max;
             try {
@@ -83,10 +83,10 @@ public class DebugClaimTest extends SubCommand {
                 min = new PlotId(Integer.parseInt(split1[0]), Integer.parseInt(split1[1]));
                 max = new PlotId(Integer.parseInt(split2[0]), Integer.parseInt(split2[1]));
             } catch (final Exception e) {
-                return !MainUtil.sendMessage(null, "&c无效的最大最小地皮ID参数. &7地皮ID参数格式 &cX;Y &7这个 X,Y 是地皮的坐标\n加入这个参数后, 数据恢复将在所选区域进行.");
+                return !MainUtil.sendMessage(null, "&cInvalid min/max values. &7The values are to Plot IDs in the format &cX;Y &7where X,Y are the plot coords\nThe conversion will only check the plots in the selected area.");
             }
-            MainUtil.sendMessage(null, "&3木牌恢复&8->&3PlotSquared&8: &7正在开始地皮数据恢复. 该过程需要一些时间...");
-            MainUtil.sendMessage(null, "&3木牌恢复&8->&3PlotSquared&8: 发现超过 25000 区块. 请限制半径... (~3.8 分钟)");
+            MainUtil.sendMessage(null, "&3Sign Block&8->&3PlotSquared&8: &7Beginning sign to plot conversion. This may take a while...");
+            MainUtil.sendMessage(null, "&3Sign Block&8->&3PlotSquared&8: Found an excess of 250,000 chunks. Limiting search radius... (~3.8 min)");
             final PlotManager manager = PlotSquared.getPlotManager(world);
             final PlotWorld plotworld = PlotSquared.getPlotWorld(world);
             final ArrayList<Plot> plots = new ArrayList<>();
@@ -94,7 +94,7 @@ public class DebugClaimTest extends SubCommand {
                 final Plot plot = MainUtil.getPlot(world, id);
                 final boolean contains = PlotSquared.getPlots(world).containsKey(plot.id);
                 if (contains) {
-                    MainUtil.sendMessage(null, " - &c数据库已存在: " + plot.id);
+                    MainUtil.sendMessage(null, " - &cDB Already contains: " + plot.id);
                     continue;
                 }
                 final Location loc = manager.getSignLoc(plotworld, plot);
@@ -122,33 +122,33 @@ public class DebugClaimTest extends SubCommand {
                             uuid = UUIDHandler.getUUID(line);
                         }
                         if (uuid != null) {
-                            MainUtil.sendMessage(null, " - &a发现了地皮: " + plot.id + " : " + line);
+                            MainUtil.sendMessage(null, " - &aFound plot: " + plot.id + " : " + line);
                             plot.owner = uuid;
                             plot.hasChanged = true;
                             plots.add(plot);
                         } else {
-                            MainUtil.sendMessage(null, " - &c无效的玩家名称: " + plot.id + " : " + line);
+                            MainUtil.sendMessage(null, " - &cInvalid playername: " + plot.id + " : " + line);
                         }
                     }
                 }
             }
             if (plots.size() > 0) {
-                MainUtil.sendMessage(null, "&3木牌恢复&8->&3PlotSquared&8: &7更新了 '" + plots.size() + "' 块地皮!");
+                MainUtil.sendMessage(null, "&3Sign Block&8->&3PlotSquared&8: &7Updating '" + plots.size() + "' plots!");
                 DBFunc.createPlotsAndData(plots, new Runnable() {
                     @Override
                     public void run() {
-                        MainUtil.sendMessage(null, "&6数据库更新成功!");
+                        MainUtil.sendMessage(null, "&6Database update finished!");
                     }
                 });
                 for (final Plot plot : plots) {
                     PlotSquared.updatePlot(plot);
                 }
-                MainUtil.sendMessage(null, "&3木牌恢复&8->&3PlotSquared&8: &7已完成!");
+                MainUtil.sendMessage(null, "&3Sign Block&8->&3PlotSquared&8: &7Complete!");
             } else {
-                MainUtil.sendMessage(null, "给出的搜索条件已经没有未恢复地图了.");
+                MainUtil.sendMessage(null, "No plots were found for the given search.");
             }
         } else {
-            MainUtil.sendMessage(plr, "&6这个指令只能通过控制台使用.");
+            MainUtil.sendMessage(plr, "&6This command can only be executed by console as it has been deemed unsafe if abused.");
         }
         return true;
     }

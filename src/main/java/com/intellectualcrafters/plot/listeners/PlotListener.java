@@ -148,7 +148,7 @@ public class PlotListener extends APlotListener {
                 if (id >= 2256 && id <= 2267) {
                     Location center = MainUtil.getPlotCenter(plot);
                     org.bukkit.Location newLoc = BukkitUtil.getLocation(center);
-                    newLoc.setY(Math.min((player.getLocation().getBlockY() /16) * 16, 240));
+                    newLoc.setY(Math.min((((int) player.getLocation().getBlockY())/16) * 16, 240));
                     try {
                         player.playEffect(newLoc, Effect.RECORD_PLAY, Material.getMaterial(id));
                     }
