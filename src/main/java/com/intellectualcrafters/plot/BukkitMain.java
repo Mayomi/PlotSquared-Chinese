@@ -522,7 +522,6 @@ public class BukkitMain extends JavaPlugin implements Listener, IPlotMain {
             FlagManager.removeFlag(FlagManager.getFlag("titles"));
         } else {
             AbstractTitle.TITLE_CLASS = new DefaultTitle();
-            
             if (UUIDHandler.uuidWrapper instanceof DefaultUUIDWrapper) {
                 Settings.TWIN_MODE_UUID = true;
             }
