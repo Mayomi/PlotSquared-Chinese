@@ -151,6 +151,7 @@ public enum C {
     /*
      * Ratings
      */
+    RATE_THIS("$2为这个地皮评分!", "Ratings"),
     RATING_NOT_VALID("$2你需要指定一个1~10之间的数", "Ratings"),
     RATING_ALREADY_EXISTS("$2你已经为地皮 $2%s 评过分了", "Ratings"),
     RATING_APPLIED("$4你为地皮 $2%s $4评分了", "Ratings"),

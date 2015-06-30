@@ -54,9 +54,14 @@ public class DebugFill extends SubCommand {
             MainUtil.sendMessage(player, C.NO_PLOT_PERMS);
             return true;
         }
+        if (MainUtil.runners.containsKey(plot)) {
+            MainUtil.sendMessage(player, C.WAIT_FOR_TIMER);
+            return false;
+        }
         final Location bottom = MainUtil.getPlotBottomLoc(plot.world, plot.id).add(1, 0, 1);
         final Location top = MainUtil.getPlotTopLoc(plot.world, plot.id);
         MainUtil.sendMessage(player, "&c准备开始进程");
+        MainUtil.runners.put(plot, 1);
         SetBlockQueue.addNotify(new Runnable() {
             @Override
             public void run() {
@@ -65,10 +70,33 @@ public class DebugFill extends SubCommand {
                     public void run() {
                         MainUtil.sendMessage(player, "&7 - 已开始");
                         if (args[0].equalsIgnoreCase("all")) {
-                            for (int x = bottom.getX(); x <= top.getX(); x++) {
-                                for (int y = 0; y <= 255; y++) {
+                        	int height = 255;
+                            PlotBlock block = new PlotBlock((short) 7, (byte) 0);
+                            PlotBlock air = new PlotBlock((short) 0, (byte) 0);
+                            if (args.length > 2) {
+                                try {
+                                    block = new PlotBlock(Short.parseShort(args[1]), (byte) 0);
+                                    if (args.length == 3) {
+                                        height = Integer.parseInt(args[2]);
+                                    }
+                                }
+                                catch (Exception e) {
+                                    MainUtil.sendMessage(player, C.COMMAND_SYNTAX, "/plot fill all <id> <高度>");
+                                    MainUtil.runners.remove(plot);
+                                    return;
+                                }
+                            }
+                            for (int y = 0; y <= height; y++) {
+                                for (int x = bottom.getX(); x <= top.getX(); x++) {
                                     for (int z = bottom.getZ(); z <= top.getZ(); z++) {
-                                        SetBlockQueue.setBlock(plot.world, x, y, z, 7);
+                                        SetBlockQueue.setBlock(plot.world, x, y, z, block);
+                                    }
+                                }
+                            }
+                            for (int y = height + 1; y <= 255; y++) {
+                                for (int x = bottom.getX(); x <= top.getX(); x++) {
+                                    for (int z = bottom.getZ(); z <= top.getZ(); z++) {
+                                    	SetBlockQueue.setBlock(plot.world, x, y, z, air);
                                     }
                                 }
                             }
@@ -76,6 +104,7 @@ public class DebugFill extends SubCommand {
                                 @Override
                                 public void run() {
                                     MainUtil.sendMessage(player, "&a填充完毕!");
+                                    MainUtil.runners.remove(plot);
                                 }
                             });
                         }
@@ -116,6 +145,7 @@ public class DebugFill extends SubCommand {
                                     SetBlockQueue.addNotify(new Runnable() {
                                         @Override
                                         public void run() {
+                                        	MainUtil.runners.remove(plot);
                                             MainUtil.sendMessage(player, "&a填充进程已完成!");
                                             SetBlockQueue.setSlow(false);
                                         }
