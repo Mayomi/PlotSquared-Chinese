@@ -350,7 +350,7 @@ public enum C {
     PLOT_UNOWNED("$2你必须是地皮拥有者才能执行这个操作", "Info"),
     PLOT_INFO_UNCLAIMED("$2地皮 $1%s$2 还未被领取", "Info"),
     PLOT_INFO_HEADER("$3====== $1信息 $3======", false, "Info"),
-    PLOT_INFO("$1ID: $2%id%$1\n" + "$1别名: $2%alias%$1\n" + "$1拥有者: $2%owner%$1\n" + "$1生物群落: $2%biome%$1\n" + "$1可否建筑: $2%build%$1\n" + "$1评分: $2%rating%$1/$210$1\n" + "$1可信玩家: $2%trusted%$1\n" + "$1成员: $2%members%$1\n" + "$1黑名单: $2%denied%$1\n" + "$1标识: $2%flags%", "Info"),
+    PLOT_INFO("$1ID: $2%id%$1\n" + "$1别名: $2%alias%$1\n" + "$1拥有者: $2%owner%$1\n" + "$1生物群落: $2%biome%$1\n" + "$1可否建筑: $2%build%$1\n" + "$1评分: $2%rating%\n" + "$1可信玩家: $2%trusted%$1\n" + "$1成员: $2%members%$1\n" + "$1黑名单: $2%denied%$1\n" + "$1标识: $2%flags%", "Info"),
     PLOT_INFO_TRUSTED("$1可信玩家:$2 %trusted%", "Info"),
     PLOT_INFO_MEMBERS("$1成员:$2 %members%", "Info"),
     PLOT_INFO_DENIED("$1黑名单玩家:$2 %denied%", "Info"),
