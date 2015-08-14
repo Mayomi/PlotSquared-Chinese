@@ -293,7 +293,6 @@ public enum C {
     /*
      * Block List
      */
-    NOT_VALID_BLOCK_LIST_HEADER("$2这不是一个有效的方块. 有效的方块:\\n", "Block List"),
     BLOCK_LIST_ITEM(" $1%mat%$2,", "Block List"),
     BLOCK_LIST_SEPARATER("$1,$2 ", "Block List"),
     /*
@@ -322,7 +321,8 @@ public enum C {
      * Invalid
      */
     NOT_VALID_DATA("$2这不是一个有效的参数值.", "Invalid"),
-    NOT_VALID_BLOCK("$2这不是一个有效的方块.", "Invalid"),
+    NOT_VALID_BLOCK("$2这不是一个有效的方块: %s", "Invalid"),
+    NOT_ALLOWED_BLOCK("$2这不是一个被允许的方块: %s", "Invalid"),
     NOT_VALID_NUMBER("$2这不是一个有效的数字", "Invalid"),
     NOT_VALID_PLOT_ID("$2这不是有效的地皮ID.", "Invalid"),
     PLOT_ID_FORM("$2地皮ID的格式必须为: $1X;Y $2例如: $1-5;7", "Invalid"),
