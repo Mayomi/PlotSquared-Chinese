@@ -64,7 +64,7 @@ public class BukkitHybridUtils extends HybridUtils {
         return Math.sqrt(sd/array.length);
     }
     
-    public double getSD(double[] array, double av) {
+    public double getSD(int[] array, double av) {
         double sd = 0;
         for (int i=0; i<array.length;i++)
         {
